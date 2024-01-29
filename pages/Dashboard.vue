@@ -8,7 +8,7 @@ import {
   limit,
   doc,
 } from "firebase/firestore";
-import Card from "~/components/card.vue";
+import Card from "~/components/Card.vue";
 
 export default {
   name: "DashboardPage",

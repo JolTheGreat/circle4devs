@@ -10,7 +10,7 @@ export default defineNuxtConfig({
             pages.push({
                 "name": "landing",
                 "path": "/",
-                file: '~/pages/landing.vue',
+                file: '~/pages/Landing.vue',
             })
         }
     },

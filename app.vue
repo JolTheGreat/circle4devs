@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import appheader from "~/components/appheader.vue";
-import landingheader from "~/components/landingheader.vue";
+import appheader from "~/components/AppHeader.vue";
+import landingheader from "~/components/LandingHeader.vue";
 
 export default {
   name: "App",
