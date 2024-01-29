@@ -1,14 +1,12 @@
 <script>
-import router from "@/router";
-
 export default {
   name: "HeaderView",
   methods: {
     register() {
-      router.push("/auth");
+      navigateTo("/auth")
     },
     login() {
-      router.push("/auth");
+      navigateTo("/auth")
     },
   },
 };
@@ -16,7 +14,7 @@ export default {
 
 <template>
   <div id="header">
-    <img src="@/assets/logo.png" @click="this.$router.push('/')" alt="logo" />
+    <img src="@/assets/logo.png" @click="navigateTo('/')" alt="logo" />
     <ul>
       <!--      <li><router-link to="/">Circleのご紹介</router-link></li>-->
       <li>

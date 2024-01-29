@@ -14,7 +14,7 @@
       </div>
       <img
         class="vector-art"
-        src="../../assets/undraw_software_engineer_re_tnjc.svg"
+        src="/assets/undraw_software_engineer_re_tnjc.svg"
         alt="vector art"
       />
     </div>
@@ -25,7 +25,7 @@
         は、個人開発者同士がアプリを通じて交わるためのプラットフォームです。下記はこれから実装していきたい機能の一覧です。今のところ、他の個人開発者が作っているものを把握し、出版したアプリをXなどで共有することができます。
       </p>
       <div id="communication">
-        <img src="../../assets/undraw_chat_re_re1u.svg" alt="vector art" />
+        <img src="assets/undraw_chat_re_re1u.svg" alt="vector art" />
         <div>
           <h2>開発者とユーザーのコミュニケーション</h2>
           <p>
@@ -40,11 +40,11 @@
             Circleでは、アプリやレビューに対する「いいね」や「共感」のリアクションを使って、共感を示し、評価を行います。評価を元にユーザーは質の高いアプリを見極め、それらを積極的に使うようになるでしょう。
           </p>
         </div>
-        <img src="../../assets/undraw_love_it_xkc2.svg" alt="vector art" />
+        <img src="/assets/undraw_love_it_xkc2.svg" alt="vector art" />
       </div>
       <div id="ranking">
         <img
-          src="../../assets/undraw_personal_goals_re_iow7.svg"
+          src="/assets/undraw_personal_goals_re_iow7.svg"
           alt="vector art"
         />
         <div>
@@ -70,7 +70,7 @@ export default {
   components: { FontAwesomeIcon },
   methods: {
     start() {
-      this.$router.push("/dashboard");
+      navigateTo("/dashboard");
     },
   },
 };

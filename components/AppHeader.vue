@@ -1,8 +1,10 @@
 <script>
 import { getAuth, signOut } from "firebase/auth";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 export default {
   name: "AppHeader",
+  components: {FontAwesomeIcon},
   data() {
     return {
       isLoggedIn: false,
@@ -23,7 +25,7 @@ export default {
     logOut: async function () {
       signOut(getAuth())
         .then(() => {
-          this.$router.push("/auth");
+          navigateTo("/auth");
         })
         .catch((error) => {
           console.log(error);
@@ -31,10 +33,10 @@ export default {
     },
     publish: function () {
       if (!this.isLoggedIn) {
-        this.$router.push("/auth");
+        navigateTo("/auth");
         return;
       }
-      this.$router.push("/create");
+      navigateTo("/create");
     },
   },
 };
@@ -45,7 +47,7 @@ export default {
     <img
       src="@/assets/logo.png"
       alt="logo"
-      @click="this.$router.push('/dashboard')"
+      @click="navigateTo('/dashboard')"
     />
     <ul>
       <li>
@@ -53,14 +55,14 @@ export default {
       </li>
     </ul>
     <div id="pane">
-      <button @click="this.$router.push('/search')">
+      <button @click="navigateTo('/search')">
         <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
       </button>
-      <button @click="this.$router.push('/profile')">
+      <button @click="navigateTo('/profile')">
         <font-awesome-icon icon="fa-solid fa-user" />
       </button>
       <button v-if="isLoggedIn" @click="logOut">ログアウト</button>
-      <button v-else @click="this.$router.push('/auth')">ログイン</button>
+      <button v-else @click="navigateTo('/auth')">ログイン</button>
     </div>
   </div>
 </template>

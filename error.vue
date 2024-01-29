@@ -9,6 +9,7 @@ const handleError = () => clearError({ redirect: '/' })
 </script>
 
 <template>
+  <Landingheader></Landingheader>
   <div>
     <h1>{{ error.statusCode }}</h1>
     <p>エラーが発生しました。</p>

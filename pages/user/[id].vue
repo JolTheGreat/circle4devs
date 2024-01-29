@@ -1,15 +1,12 @@
 <script>
 import {
   collection,
-  doc, getDoc, getDocs, query, where,
+  doc, getDoc, getDocs, limit, query, where,
 } from "firebase/firestore";
-import {db} from "@/main";
-import CardPart from "@/components/parts/Card.vue";
 import {getAuth} from "firebase/auth";
 
 export default {
   name: "UserPage",
-  components: {CardPart},
   data() {
     return {
       user: {},
@@ -28,17 +25,18 @@ export default {
       }
     });
 
-    const userRef = doc(db, "users", userId);
+    const userRef = doc(this.$db, "users", userId);
     const userSnap = await getDoc(userRef);
     this.user = userSnap.data();
 
     const apps = await getDocs(
         query(
-            collection(db, "apps"),
-            where("owner", "==", userRef)
-        )
+            collection(this.$db, "apps"),
+            where("owner", "==", userRef),
+            where("draft", "==", false))
     );
     apps.docs.forEach((app, index) => {
+      console.log(app.data())
       this.apps.push(app.data());
       this.apps[index].id = app.id;
     });

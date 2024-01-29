@@ -1,6 +1,5 @@
 <script>
 import {deleteDoc, doc, getDoc} from "firebase/firestore";
-import {db} from "@/main";
 import Markdown from "markdown-it";
 import {getAuth} from "firebase/auth";
 import {deleteObject, getStorage, ref as storageRef} from "firebase/storage";
@@ -23,7 +22,7 @@ export default {
   mounted() {
     const auth = getAuth();
     const id = this.$route.params.id;
-    const docRef = doc(db, "apps", id);
+    const docRef = doc(this.$db, "apps", id);
     getDoc(docRef).then(async (doc) => {
       if (doc.exists()) {
         const data = doc.data();
@@ -60,7 +59,7 @@ export default {
     async deleteApp() {
       if (confirm("アプリを削除しますか？ この操作は取り消せません")) {
         const id = this.$route.params.id;
-        const docRef = doc(db, "apps", id);
+        const docRef = doc(this.$db, "apps", id);
         const app = await getDoc(docRef);
 
         app.data().images.forEach((imagePath) => {
@@ -83,7 +82,7 @@ export default {
     },
     async revertToDraft() {
       const id = this.$route.params.id;
-      const docRef = doc(db, "apps", id);
+      const docRef = doc(this.$db, "apps", id);
       await updateDoc(docRef, {
         draft: true,
       });
@@ -210,7 +209,7 @@ export default {
 }
 
 #delete-button:hover {
-  background-color: #ff0000;
+  background-color: #c91818;
 }
 
 #edit-button {
@@ -296,6 +295,10 @@ export default {
 
 :deep(.article-content) p {
   margin-bottom: 10px;
+}
+
+:deep(.article-content) a:hover {
+  color: #219191;
 }
 
 :deep(.article-content) ul {

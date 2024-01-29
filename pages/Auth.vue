@@ -1,9 +1,8 @@
 <script>
-import { getAuth } from "firebase/auth";
+import {getAuth} from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebaseui/dist/firebaseui.css";
-import router from "@/router";
-import * as firebaseui from 'firebaseui/dist/esm__ja'
+
 export default {
   name: "AuthPage",
   data() {
@@ -12,15 +11,17 @@ export default {
       password: undefined,
     };
   },
-  mounted() {
+
+  async mounted() {
+    const firebaseui = await import('firebaseui/dist/esm__ja')
     const ui =
-      firebaseui.auth.AuthUI.getInstance() ||
-      new firebaseui.auth.AuthUI(getAuth());
+        firebaseui.auth.AuthUI.getInstance() ||
+        new firebaseui.auth.AuthUI(getAuth());
     ui.start("#firebaseui-auth-container", {
       signInOptions: [firebase.auth.GithubAuthProvider.PROVIDER_ID, firebase.auth.TwitterAuthProvider.PROVIDER_ID],
       signInFlow: "popup",
       credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-      tosUrl: "/terms",
+      tosUrl: "/privacy",
       privacyPolicyUrl: "/privacy",
       callbacks: {
         signInSuccessWithAuthResult: function (authResult) {
@@ -28,7 +29,7 @@ export default {
           user.getIdToken().then(function (accessToken) {
             document.cookie = `token=${accessToken}`;
           });
-          router.push("/dashboard");
+          navigateTo("/dashboard");
         },
       },
     });

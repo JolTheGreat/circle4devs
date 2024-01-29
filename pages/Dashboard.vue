@@ -8,8 +8,7 @@ import {
   limit,
   doc,
 } from "firebase/firestore";
-import {db} from "@/main";
-import Card from "@/components/parts/Card.vue";
+import Card from "~/components/card.vue";
 
 export default {
   name: "DashboardPage",
@@ -34,8 +33,8 @@ export default {
       if (this.isLoggedIn) {
         recommends = await getDocs(
             query(
-                collection(db, "apps"),
-                where("owner", "!=", doc(db, "users", user.uid)),
+                collection(this.$db, "apps"),
+                where("owner", "!=", doc(this.$db, "users", user.uid)),
                 where("draft", "==", false),
                 limit(10)
             )
@@ -43,7 +42,7 @@ export default {
       } else {
         recommends = await getDocs(
             query(
-                collection(db, "apps"),
+                collection(this.$db, "apps"),
                 where("draft", "==", false),
                 limit(10)
             )
@@ -94,7 +93,7 @@ export default {
           </template>
         </div>
       </div>
-      <!-- Create a section for a trending apps -->
+      <!-- Create a section for a trending app -->
     </div>
   </div>
 </template>

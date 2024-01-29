@@ -1,16 +1,11 @@
 <script>
-import algoliasearch from "algoliasearch/lite";
 import "instantsearch.css/themes/satellite.css";
-import CardPart from "@/components/parts/Card.vue";
+
 export default {
   name: "SearchPage",
-  components: { CardPart },
   data() {
     return {
-      searchClient: algoliasearch(
-        "VFQE8S5Y20",
-        "2352cde0d4c737c8389b852a1c8b348c"
-      ),
+      searchClient: useAlgoliaRef()
     };
   },
   mounted() {
@@ -32,7 +27,7 @@ export default {
         <ais-search-box />
         <ais-hits>
           <template v-slot:item="{ item }">
-            <CardPart v-bind:id="item.objectID" />
+            <Card v-bind:id="item.objectID" />
           </template>
         </ais-hits>
       </ais-instant-search>

@@ -1,13 +1,10 @@
 <script>
 
-import CardPart from "@/components/parts/Card.vue";
 import {collection, doc, getDoc, getDocs, query, where} from "firebase/firestore";
-import {db} from "@/main";
 import {getAuth} from "firebase/auth";
 
 export default {
   name: "ProfilePage",
-  components: { CardPart },
   data() {
     return {
       owner: "",
@@ -18,23 +15,23 @@ export default {
     const auth = getAuth();
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        const appUser = doc(db, "users", user.uid);
+        const appUser = doc(this.$db, "users", user.uid);
         this.owner = await (await getDoc(appUser)).data();
         console.log(this.owner)
         const apps = await getDocs(
             query(
-                collection(db, "apps"),
+                collection(this.$db, "apps"),
                 where("owner", "==", appUser)
             )
         );
-        // add apps to this.apps and add id to each app
+        // add app to this.app and add id to each app
         apps.docs.forEach((app, index) => {
           this.apps.push(app.data());
           this.apps[index].id = app.id;
         });
         console.log(this.apps )
       } else {
-        this.$router.push("/");
+        navigateTo("/");
       }
     });
   },
@@ -45,7 +42,7 @@ export default {
         const user = auth.currentUser;
         user.delete().then(() => {
           console.log("deleted");
-          this.$router.push("/");
+          navigateTo("/");
         }).catch((error) => {
           console.log(error);
         });
@@ -72,16 +69,16 @@ export default {
       <div id="apps">
         <h3>投稿したアプリ</h3>
         <div id="apps-list">
-          <div v-for="app in apps" :key="app.id" id="app">
-            <CardPart
-                      :id="app.id"
-                      :title="app.title"
-                      :catchphrase="app.catchphrase"
-                      :image="app.images[0]"
-                      :owner="app.owner"
-                      :tags="app.tags"
+          <template v-for="app in apps" :key="app.id">
+            <Card
+                :id="app.id"
+                :title="app.title"
+                :catchphrase="app.catchphrase"
+                :image="app.images[0]"
+                :owner="app.owner"
+                :tags="app.tags"
             />
-          </div>
+          </template>
         </div>
       </div>
     </div>
@@ -166,22 +163,36 @@ export default {
 }
 
 #apps-list {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
+  margin-top: 2rem;
+  padding: 1rem;
+  height: max-content;
   justify-content: space-between;
-  overflow-x: scroll;
-  margin-top: 20px;
-}
-
-#app {
-  width: 100%;
-  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  border-radius: 1rem;
+  background: whitesmoke;
 }
 
+#apps-list::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#apps-list::-webkit-scrollbar-thumb {
+  background: #2dbfbf;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25),
+  inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+}
+
+#apps-list::-webkit-scrollbar-track {
+  background: linear-gradient(90deg, #201c29, #201c29 1px, #17141d 0, #17141d);
+}
+
+.card {
+  margin: 15px;
+}
 
 </style>

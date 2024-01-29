@@ -1,6 +1,5 @@
 <script>
 import {doc, getDoc} from "firebase/firestore";
-import {db} from "@/main";
 
 export default {
   name: "CardPart",
@@ -32,12 +31,14 @@ export default {
         this.tags === undefined
     ) {
       console.log("fetching data");
-      const docRef = doc(db, "apps", this.id);
+      const docRef = doc(this.$db, "apps", this.id);
       const docSnap = await getDoc(docRef);
 
       if (this.id === undefined) {
         this.idd = docSnap.id;
-        console.log(this.id);
+        console.log(this.idd);
+      } else {
+        this.idd = this.id;
       }
 
       if (this.title === undefined) {
@@ -84,12 +85,14 @@ export default {
       this.tgs = this.tags;
     }
 
+
     const owner = await getDoc(this.o);
     this.o = owner.data();
   },
   methods: {
     openArticle() {
-      this.$router.push(`/app/${this.idd}`);
+      console.log(this.idd)
+      navigateTo(`/app/${this.idd}`);
     },
   },
 };
@@ -179,7 +182,7 @@ export default {
 .user {
   display: flex;
   align-items: center;
-  margin-top: 90px;
+  margin-top: 50px;
 }
 
 .user img {

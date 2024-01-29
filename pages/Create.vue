@@ -1,7 +1,6 @@
 <script>
 import {getAuth} from "firebase/auth";
 import {
-  getFirestore,
   where,
   query,
   getDoc,
@@ -19,7 +18,6 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
-import {db} from "@/main";
 
 export default {
   name: "CreatePage",
@@ -57,7 +55,7 @@ export default {
         );
 
         if (draftId) {
-          const docRef = doc(db, "apps", draftId);
+          const docRef = doc(this.$db, "apps", draftId);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             console.log("Document data:", docSnap.data());
@@ -76,12 +74,12 @@ export default {
           window.history.pushState({}, null, "/create");
         }
 
-        const value = doc(db, "users", user.uid);
+        const value = doc(this.$db, "users", user.uid);
 
         try {
           const docs = await getDocs(
               query(
-                  collection(db, "apps"),
+                  collection(this.$db, "apps"),
                   where("owner", "==", value),
                   where("draft", "==", true)
               )
@@ -127,7 +125,7 @@ export default {
         await this.createAppDoc(false);
       } else {
         //update the current draft
-        const docRef = doc(db, "apps", draftId);
+        const docRef = doc(this.$db, "apps", draftId);
 
         if (!(await getDoc(docRef)).exists()) {
           await this.createAppDoc(false);
@@ -149,7 +147,7 @@ export default {
         );
         console.log("Document written with ID: ", docRef.id);
       }
-      this.$toast.open({
+      this.$vueToast.open({
         message: "アプリを出版しました",
         type: "success",
         position: "bottom",
@@ -167,7 +165,7 @@ export default {
         await this.createAppDoc(true);
       } else {
         //update the current draft
-        const docRef = doc(db, "apps", draftId);
+        const docRef = doc(this.$db, "apps", draftId);
 
         if (!(await getDoc(docRef)).exists()) {
           await this.createAppDoc(true);
@@ -194,7 +192,7 @@ export default {
     },
 
     async deleteDraft(draftId) {
-      await deleteDoc(doc(db, "apps", draftId));
+      await deleteDoc(doc(this.$db, "apps", draftId));
       this.sendNotification("下書きを削除しました", "info");
       this.drafts = this.drafts.filter((draft) => draft.id !== draftId);
     },
@@ -203,7 +201,7 @@ export default {
       window.location.href = `/create?draftId=${draftId}`;
     },
     sendNotification(message, type) {
-      this.$toast.open({
+      this.$vueToast.open({
         message: message,
         type: type,
         position: "bottom",
@@ -273,9 +271,8 @@ export default {
       return true;
     },
     async createAppDoc(draft) {
-      const db = getFirestore();
-      const collectionRef = collection(db, "apps");
-      const owner = doc(db, "users", this.auth.user.uid);
+      const collectionRef = collection(this.$db, "apps");
+      const owner = doc(this.$db, "users", this.auth.user.uid);
       const data1 = {
         title: this.title,
         catchphrase: this.catchphrase,
