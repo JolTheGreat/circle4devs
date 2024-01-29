@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npx patch-package && nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    "generate": "npx patch-package && nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
