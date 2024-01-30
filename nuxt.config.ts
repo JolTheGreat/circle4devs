@@ -1,7 +1,7 @@
 import {defineNuxtConfig} from 'nuxt/config'
 
 export default defineNuxtConfig({
-    ssr: true,
+    ssr: false,
     devtools: {enabled: true},
     css: [
         '@fortawesome/fontawesome-svg-core/styles.css'
