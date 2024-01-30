@@ -23,7 +23,7 @@ export default {
       title: this.title
     };
   },
-  mounted() {
+  created() {
     const auth = getAuth();
     const id = this.$route.params.id;
     const docRef = doc(this.$db, "apps", id);
