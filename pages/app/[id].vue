@@ -18,6 +18,11 @@ export default {
       isOwner: false,
     };
   },
+  head() {
+    return {
+      title: this.title
+    };
+  },
   mounted() {
     const auth = getAuth();
     const id = this.$route.params.id;
@@ -109,7 +114,6 @@ export default {
     <Meta name="twitter:image" :content="images[0]"/>
     <Meta name="twitter:url" :content="url"/>
     <Meta name="twitter:domain" content="Circle4Devs"/>
-
   </Head>
 
   <div id="article">

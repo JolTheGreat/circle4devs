@@ -72,6 +72,10 @@ export default {
 </script>
 
 <template>
+  <Head>
+    <Title>Circle4Devsダッシュボード</Title>
+
+  </Head>
   <div id="home">
     <div class="page">
       <h1>Circle4Devs Dashboard</h1>

@@ -20,6 +20,9 @@ export default {
 </script>
 
 <template>
+  <Head>
+    <Title>検索</Title>
+  </Head>
   <div id="container">
     <h2>検索</h2>
     <div id="search-box">

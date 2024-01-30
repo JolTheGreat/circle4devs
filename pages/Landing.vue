@@ -1,4 +1,19 @@
 <template>
+  <Head>
+    <Title>Circle4Devsとは？</Title>
+    <Meta name="description" content="開発したアプリを発信しよう！"/>
+    <Meta property="og:title" content="Circle4Devsとは？"/>
+    <Meta property="og:description" content="開発したアプリを発信しよう！"></Meta>
+    <Meta property="og:url" content="https://circle4devs.netlify.app/"/>
+    <Meta property="og:type" content="website"/>
+    <Meta property="og:site_name" content="Circle4Devs"/>
+    <Meta name="twitter:card" content="summary_large_image"/>
+    <Meta name="twitter:site" content="@Circle4Devs"/>
+    <Meta name="twitter:title" content="Circle4Devsとは？"/>
+    <Meta name="twitter:description" content="開発したアプリを発信しよう！"/>
+    <Meta name="twitter:url" content="https://circle4devs.netlify.app/"/>
+    <Meta name="twitter:domain" content="Circle4Devs"/>
+  </Head>
   <div id="landing">
     <div class="title-page">
       <div class="title-page-content">
@@ -8,14 +23,18 @@
           <button @click="start">Circle4Devsを開く</button>
         </div>
         <div class="social-links">
-          <a href=""><font-awesome-icon icon="fa-brands fa-twitter" /></a>
-          <a href="#"><font-awesome-icon icon="fa-brands fa-discord" /></a>
+          <a href="">
+            <font-awesome-icon icon="fa-brands fa-twitter"/>
+          </a>
+          <a href="#">
+            <font-awesome-icon icon="fa-brands fa-discord"/>
+          </a>
         </div>
       </div>
       <img
-        class="vector-art"
-        src="/assets/undraw_software_engineer_re_tnjc.svg"
-        alt="vector art"
+          class="vector-art"
+          src="/assets/undraw_software_engineer_re_tnjc.svg"
+          alt="vector art"
       />
     </div>
     <section id="about">
@@ -25,7 +44,7 @@
         は、個人開発者同士がアプリを通じて交わるためのプラットフォームです。個人開発者が開発するアプリはWebアプリやモバイルアプリがありますが、それらの評価や使い勝手などはXやAppStoreといった様々な場所に散らばっています。小規模で開発されているアプリをまとめて、開発者にとっての最大の喜びである「使ってもらうこと」を満たすために、Circle4Devsは開発したアプリを発信し、他の開発者が使ってあげることで自分と似たような開発者たちに還元できる仕組みになっています。下記はこれから実装していきたい機能の一覧です。今のところ、他の個人開発者が作っているものを把握し、出版したアプリをXなどで共有することができます。上記のXとDiscordは整備中です！
       </p>
       <div id="communication">
-        <img src="assets/undraw_chat_re_re1u.svg" alt="vector art" />
+        <img src="assets/undraw_chat_re_re1u.svg" alt="vector art"/>
         <div>
           <h2>開発者とユーザーのコミュニケーション</h2>
           <p>
@@ -40,12 +59,12 @@
             Circle4Devsでは、アプリやレビューに対する「いいね」や「共感」のリアクションを使って、開発者のアプリが評価されます。評価を元に、開発者はアプリに求められているものを把握し、改善に務めることができます。
           </p>
         </div>
-        <img src="/assets/undraw_love_it_xkc2.svg" alt="vector art" />
+        <img src="/assets/undraw_love_it_xkc2.svg" alt="vector art"/>
       </div>
       <div id="ranking">
         <img
-          src="/assets/undraw_personal_goals_re_iow7.svg"
-          alt="vector art"
+            src="/assets/undraw_personal_goals_re_iow7.svg"
+            alt="vector art"
         />
         <div>
           <h2>ランキングと発見</h2>
@@ -60,11 +79,11 @@
 </template>
 
 <script>
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 export default {
   name: "LandingPage",
-  components: { FontAwesomeIcon },
+  components: {FontAwesomeIcon},
   methods: {
     start() {
       navigateTo("/dashboard");

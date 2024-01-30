@@ -54,6 +54,9 @@ export default {
 </script>
 
 <template>
+  <Head>
+    <Title>{{owner.name}}</Title>
+  </Head>
   <div id="container">
     <h2>プロフィール</h2>
     <div id="profile-box">

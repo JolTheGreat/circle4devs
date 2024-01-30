@@ -7,10 +7,10 @@ export default defineNuxtConfig({
         '@fortawesome/fontawesome-svg-core/styles.css'
     ],
     hooks: {
-        "pages:extend"(pages) {
+        'pages:extend'(pages) {
             pages.push({
-                "name": "landing",
-                "path": "/",
+                'name': 'landing',
+                'path': '/',
                 file: '~/pages/Landing.vue',
             })
         }

@@ -362,6 +362,9 @@ export default {
 </script>
 
 <template>
+  <Head>
+    <Title>アプリを出版する</Title>
+  </Head>
   <div id="general-container">
     <h1>アプリを出版する</h1>
 

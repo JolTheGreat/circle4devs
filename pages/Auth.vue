@@ -11,7 +11,6 @@ export default {
       password: undefined,
     };
   },
-
   async mounted() {
     const firebaseui = await import('firebaseui/dist/esm__ja')
     const ui =
@@ -39,6 +38,9 @@ export default {
 </script>
 
 <template>
+  <Head>
+    <Title>新規登録・サインイン</Title>
+  </Head>
   <div id="container">
     <h2>新規登録・サインイン</h2>
     <div id="firebaseui-auth-container"></div>
