@@ -23,10 +23,10 @@ export default {
       title: this.title
     };
   },
-  created() {
+  async beforeMount() {
     const auth = getAuth();
     const id = this.$route.params.id;
-    const docRef = doc(this.$db, "apps", id);
+    const docRef = await doc(this.$db, "apps", id);
     getDoc(docRef).then(async (doc) => {
       if (doc.exists()) {
         const data = doc.data();
