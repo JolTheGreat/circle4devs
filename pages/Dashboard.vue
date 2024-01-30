@@ -74,7 +74,7 @@ export default {
 <template>
   <div id="home">
     <div class="page">
-      <h1>Circle Dashboard</h1>
+      <h1>Circle4Devs Dashboard</h1>
 
       <div class="section">
         <h2 v-if="isLoggedIn">{{ getUser().displayName }}さんにオススメのアプリ</h2>

@@ -16,7 +16,7 @@ export default {
   <div id="header">
     <img src="@/assets/logo.png" @click="navigateTo('/')" alt="logo" />
     <ul>
-      <!--      <li><router-link to="/">Circleのご紹介</router-link></li>-->
+      <!--      <li><router-link to="/">Circle4Devsのご紹介</router-link></li>-->
       <li>
         <router-link to="/privacy">プライバシーポリシー＆利用規約</router-link>
       </li>

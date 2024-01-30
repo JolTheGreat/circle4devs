@@ -95,20 +95,21 @@ export default {
 <template>
   <Head>
     <Title>{{ title }}</Title>
-    <Meta name="description" v-bind:content="catchphrase"/>
-    <Meta property="og:title" v-bind:content="title"/>
-    <Meta property="og:description" v-bind:content="catchphrase"/>
-    <Meta property="og:image" v-bind:content="images[0]"/>
-    <Meta property="og:url" v-bind:content="url"/>
+    <Meta name="description" :content="catchphrase"/>
+    <Meta property="og:title" :content="title"/>
+    <Meta property="og:description" :content="catchphrase"/>
+    <Meta property="og:image" :content="images[0]"/>
+    <Meta property="og:url" :content="url"/>
     <Meta property="og:type" content="website"/>
-    <Meta property="og:site_name" content="Circle"/>
+    <Meta property="og:site_name" content="Circle4Devs"/>
     <Meta name="twitter:card" content="summary_large_image"/>
-    <Meta name="twitter:site" content="@Circle"/>
-    <Meta name="twitter:title" v-bind:content="title"/>
-    <Meta name="twitter:description" v-bind:content="catchphrase"/>
-    <Meta name="twitter:image" v-bind:content="images[0]"/>
-    <Meta name="twitter:url" v-bind:content="url"/>
-    <Meta name="twitter:domain" content="Circle"/>
+    <Meta name="twitter:site" content="@Circle4Devs"/>
+    <Meta name="twitter:title" :content="title"/>
+    <Meta name="twitter:description" :content="catchphrase"/>
+    <Meta name="twitter:image" :content="images[0]"/>
+    <Meta name="twitter:url" :content="url"/>
+    <Meta name="twitter:domain" content="Circle4Devs"/>
+
   </Head>
 
   <div id="article">
