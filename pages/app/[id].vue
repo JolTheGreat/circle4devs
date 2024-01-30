@@ -112,8 +112,6 @@ export default {
     <Meta name="twitter:title" :content="title"/>
     <Meta name="twitter:description" :content="catchphrase"/>
     <Meta name="twitter:image" :content="images[0]"/>
-    <Meta name="twitter:url" :content="url"/>
-    <Meta name="twitter:domain" content="Circle4Devs"/>
   </Head>
 
   <div id="article">
