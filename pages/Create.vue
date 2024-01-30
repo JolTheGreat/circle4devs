@@ -147,7 +147,7 @@ export default {
         );
         console.log("Document written with ID: ", docRef.id);
       }
-      this.$vueToast.open({
+      this.$toast.open({
         message: "アプリを出版しました",
         type: "success",
         position: "bottom",
@@ -201,7 +201,7 @@ export default {
       window.location.href = `/create?draftId=${draftId}`;
     },
     sendNotification(message, type) {
-      this.$vueToast.open({
+      this.$toast.open({
         message: message,
         type: type,
         position: "bottom",

@@ -5,7 +5,6 @@ import {getAuth} from "firebase/auth";
 import {deleteObject, getStorage, ref as storageRef} from "firebase/storage";
 import {updateDoc} from "firebase/firestore";
 
-
 export default {
   name: "AppPage",
   data() {
@@ -94,6 +93,24 @@ export default {
 </script>
 
 <template>
+  <Head>
+    <Title>{{ title }}</Title>
+    <Meta name="description" content="{{ catchphrase }}"/>
+    <Meta property="og:title" content="{{ title }}"/>
+    <Meta property="og:description" content="{{ catchphrase }}"/>
+    <Meta property="og:image" content="{{ images[0] }}"/>
+    <Meta property="og:url" content="{{url}}"/>
+    <Meta property="og:type" content="website"/>
+    <Meta property="og:site_name" content="Circle"/>
+    <Meta property="og:locale" content="ja_JP"/>
+    <Meta name="twitter:card" content="summary_large_image"/>
+    <Meta name="twitter:site" content="@Circle"/>
+    <Meta name="twitter:url" content="{{url}}"/>
+    <Meta name="twitter:title" content="{{ title }}"/>
+    <Meta name="twitter:description" content="{{ catchphrase }}"/>
+    <Meta name="twitter:image" content="{{ images[0] }}"/>
+  </Head>
+
   <div id="article">
     <div class="article-header">
       <h1>{{ title }}</h1>
