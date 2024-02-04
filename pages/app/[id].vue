@@ -16,6 +16,7 @@ useSeoMeta({
   twitterCard: "summary_large_image",
   twitterSite: "@Circle4Devs",
   twitterCreator: "@Circle4Devs",
+  twitterImage: data.images[0],
   ogType: "article",
   ogSiteName: "Circle",
   ogTitle: data.title,
