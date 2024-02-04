@@ -92,7 +92,7 @@ export default {
   methods: {
     openArticle() {
       console.log(this.idd)
-      navigateTo(`/app/${this.idd}`);
+      navigateTo(`/app/${this.idd}`, {external: true});
     },
   },
 };

@@ -1,139 +1,97 @@
-<script>
-import {deleteDoc, doc, getDoc} from "firebase/firestore";
+<script setup>
+import {deleteDoc, doc, getDoc, updateDoc} from "firebase/firestore";
 import Markdown from "markdown-it";
-import {getAuth} from "firebase/auth";
 import {deleteObject, getStorage, ref as storageRef} from "firebase/storage";
-import {updateDoc} from "firebase/firestore";
+import {useRoute} from "vue-router";
 
-export default {
-  name: "AppPage",
-  data() {
-    return {
-      title: "",
-      catchphrase: "",
-      images: [],
-      description: "",
-      owner: "",
-      url: "",
-      isOwner: false,
-    };
-  },
-  head() {
-    return {
-      title: this.title
-    };
-  },
-  async beforeMount() {
-    const auth = getAuth();
-    const id = this.$route.params.id;
-    const docRef = await doc(this.$db, "apps", id);
-    getDoc(docRef).then(async (doc) => {
-      if (doc.exists()) {
-        const data = doc.data();
-        this.title = data.title;
-        this.catchphrase = data.catchphrase;
-        this.images = data.images;
-        console.log(this.images)
-        this.description = data.description;
-        this.owner = await (await getDoc(data.owner)).data();
-        this.url = data.url;
+const nuxtApp = useNuxtApp();
+const route = useRoute();
+const id = route.params.id;
 
-        auth.onAuthStateChanged((user) => {
-          if (user) {
-            if (user.uid === this.owner.id) {
-              this.isOwner = true;
-            }
-          }
-        });
-      } else {
-        console.log("No such document!");
-      }
-    });
-  },
-  computed: {
-    getMarkdown() {
-      const md = new Markdown();
-      return md.render(this.description);
-    },
-  },
-  methods: {
-    openApp() {
-      window.open(this.url, "_blank");
-    },
-    async deleteApp() {
-      if (confirm("アプリを削除しますか？ この操作は取り消せません")) {
-        const id = this.$route.params.id;
-        const docRef = doc(this.$db, "apps", id);
-        const app = await getDoc(docRef);
+const data = await reactive(nuxtApp.$app);
+useSeoMeta({
+  title: data.title,
+  description: data.catchphrase,
+  image: data.images[0],
+  twitterCard: "summary_large_image",
+  twitterSite: "@Circle4Devs",
+  twitterCreator: "@Circle4Devs",
+  ogType: "article",
+  ogSiteName: "Circle",
+  ogTitle: data.title,
+  ogDescription: data.catchphrase,
+  ogImage: data.images[0],
+  ogUrl: data.url,
+})
 
-        app.data().images.forEach((imagePath) => {
-          let name = imagePath.substr(imagePath.indexOf('%2F') + 3, (imagePath.indexOf('?')) - (imagePath.indexOf('%2F') + 3));
-          name = name.replace('%20', ' ');
-          console.log(name)
-          const imageRef = storageRef(getStorage(), `app_images/${name}`);
-          deleteObject(imageRef).then(() => {
-          }).catch(() => {
-          });
-        });
+const getMarkdown = () => {
+  const md = new Markdown();
+  return md.render(data.description);
+};
 
+const openApp = () => {
+  window.open(data.url, "_blank");
+};
 
+const deleteApp = async () => {
+  if (confirm("アプリを削除しますか？ この操作は取り消せません")) {
+    const id = route.params.id;
+    const docRef = doc(nuxtApp.$db, "apps", id);
+    const app = await getDoc(docRef);
 
-        deleteDoc(docRef).then(() => {
-          alert("アプリを削除しました")
-          navigateTo("/dashboard");
-        });
-      }
-    },
-    async revertToDraft() {
-      const id = this.$route.params.id;
-      const docRef = doc(this.$db, "apps", id);
-      await updateDoc(docRef, {
-        draft: true,
+    app.data().images.forEach((imagePath) => {
+      let name = imagePath.substr(imagePath.indexOf('%2F') + 3, (imagePath.indexOf('?')) - (imagePath.indexOf('%2F') + 3));
+      name = name.replace('%20', ' ');
+      console.log(name)
+      const imageRef = storageRef(getStorage(), `app_images/${name}`);
+      deleteObject(imageRef).then(() => {
+      }).catch(() => {
       });
-      alert("下書きに戻しました。アプリを出版するときの画面にて確認できます。")
+    });
+
+    deleteDoc(docRef).then(() => {
+      alert("アプリを削除しました")
       navigateTo("/dashboard");
-    }
-  },
+    });
+  }
+};
+
+const revertToDraft = async () => {
+  const id = route.params.id;
+  const docRef = doc(nuxtApp.$db, "apps", id);
+  await updateDoc(docRef, {
+    draft: true,
+  });
+  alert("下書きに戻しました。アプリを出版するときの画面にて確認できます。")
+  navigateTo("/dashboard");
 };
 </script>
 
 <template>
-  <Head>
-    <Title>{{ title }}</Title>
-    <Meta name="description" :content="catchphrase"/>
-    <Meta property="og:title" :content="title"/>
-    <Meta property="og:description" :content="catchphrase"/>
-    <Meta property="og:image" :content="images[0]"/>
-    <Meta property="og:url" :content="url"/>
-    <Meta property="og:type" content="website"/>
-    <Meta property="og:site_name" content="Circle4Devs"/>
-    <Meta name="twitter:card" content="summary_large_image"/>
-    <Meta name="twitter:site" content="@Circle4Devs"/>
-    <Meta name="twitter:title" :content="title"/>
-    <Meta name="twitter:description" :content="catchphrase"/>
-    <Meta name="twitter:image" :content="images[0]"/>
-  </Head>
-
   <div id="article">
     <div class="article-header">
-      <h1>{{ title }}</h1>
-      <p>{{ catchphrase }}</p>
-      <div id="images" v-for="image in images" v-bind:key="image">
-        <img v-bind:src="image" alt="image"/>
+      <h1>{{ data.title }}</h1>
+      <p>{{ data.catchphrase }}</p>
+      <div id="images" v-for="image in data.images" :key="image">
+        <img :src="image" alt="image"/>
+      </div>
+      <div id="tags" v-for="tag in data.tags" :key="tag">
+        <span>#{{ tag }}</span>
       </div>
       <div class="user">
-        <img v-bind:src="owner.photoUrl" alt="user"/>
-        <a v-bind:href="'/user/' + owner.id">{{ owner.name }}</a>
+        <img :src="data.owner.photoUrl" alt="user"/>
+        <a :href="'/user/' + data.owner.id">{{ data.owner.name }}</a>
       </div>
-      <button id="open-button" @click="openApp">アプリを開く</button>
-      <button v-if="isOwner" id="delete-button" @click="deleteApp">アプリを削除</button> <!-- Add this line -->
-      <button v-if="isOwner" id="edit-button" @click="revertToDraft">下書きに戻す</button> <!-- Add this line -->
+      <button id="open-button" @click="openApp()">アプリを開く</button>
+      <button v-if="data.isOwner" id="delete-button" @click="deleteApp()">アプリを削除</button>
+      <button v-if="data.isOwner" id="edit-button" @click="revertToDraft()">下書きに戻す</button>
     </div>
     <div class="article-content">
-      <div v-html="getMarkdown"></div>
+      <div v-html="getMarkdown()"></div>
     </div>
   </div>
 </template>
+
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Source+Code+Pro&display=swap");
@@ -175,6 +133,21 @@ export default {
   width: 300px;
   height: 200px;
   margin: 20px;
+}
+
+#tags {
+  display: inline-flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+#tags span {
+  font-size: 0.8rem;
+  color: #333;
+  background: #eee;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .user {

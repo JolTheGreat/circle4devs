@@ -1,6 +1,6 @@
 <template>
-  <landingheader v-if="header"></landingheader>
-  <appheader v-else></appheader>
+  <LandingHeader v-if="header"></LandingHeader>
+  <AppHeader v-else></AppHeader>
     <NuxtPage />
 </template>
 

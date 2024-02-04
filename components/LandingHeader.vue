@@ -110,7 +110,7 @@ export default {
 
 @media (max-width: 768px) {
   #header {
-    position: relative;
+    position: fixed;
     flex-direction: column;
     justify-content: center;
     align-items: center;
