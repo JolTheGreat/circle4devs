@@ -10,7 +10,7 @@ const id = route.params.id;
 
 const data = await reactive(nuxtApp.$app);
 useSeoMeta({
-  title: data.title,
+  title: data.title + "　-　Circle4Devs",
   description: data.catchphrase,
   image: data.images[0],
   twitterCard: "summary_large_image",
