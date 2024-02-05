@@ -27,6 +27,10 @@ export default defineNuxtConfig({
         {
             src: '~/plugins/toast.js',
             mode: 'client',
+        },
+        {
+            src: '~/plugins/algolia.js',
+            mode: 'client',
         }
     ],
     modules: [['@nuxtjs/algolia', {

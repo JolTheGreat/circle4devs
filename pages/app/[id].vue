@@ -43,7 +43,6 @@ const deleteApp = async () => {
     app.data().images.forEach((imagePath) => {
       let name = imagePath.substr(imagePath.indexOf('%2F') + 3, (imagePath.indexOf('?')) - (imagePath.indexOf('%2F') + 3));
       name = name.replace('%20', ' ');
-      console.log(name)
       const imageRef = storageRef(getStorage(), `app_images/${name}`);
       deleteObject(imageRef).then(() => {
       }).catch(() => {

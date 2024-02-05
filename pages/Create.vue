@@ -46,7 +46,6 @@ export default {
           document.cookie = `token=${idToken}`;
         });
 
-        console.log("user is signed in");
         this.auth.isLoggedIn = true;
         this.auth.user = user;
 
@@ -58,7 +57,6 @@ export default {
           const docRef = doc(this.$db, "apps", draftId);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
             this.title = docSnap.data().title;
             this.catchphrase = docSnap.data().catchphrase;
             this.uploadedImages = docSnap.data().images;
@@ -95,7 +93,6 @@ export default {
               tags: doc.data().tags,
             };
           });
-          console.log(this.drafts);
         } catch (e) {
           console.log(e);
         }
@@ -145,7 +142,6 @@ export default {
             },
             {merge: true}
         );
-        console.log("Document written with ID: ", docRef.id);
       }
       this.$toast.open({
         message: "アプリを出版しました",
@@ -185,7 +181,6 @@ export default {
             },
             {merge: true}
         );
-        console.log("Document written with ID: ", docRef.id);
       }
       this.sendNotification("下書きを保存しました", "info");
       this.isDraft = true;
@@ -285,11 +280,7 @@ export default {
         draft: draft,
         createdAt: new Date(),
       };
-      console.log(data1);
-      console.log(owner.id);
-      console.log(this.auth.user);
       const docRef = await addDoc(collectionRef, data1);
-      console.log("Document written with ID: ", docRef.id);
       window.history.pushState({}, null, `/create?draftId=${docRef.id}`);
     },
     async onFileChange(event) {
@@ -313,9 +304,23 @@ export default {
         const img = new Image();
         img.src = URL.createObjectURL(file);
         img.onload = async () => {
-          if (img.width !== 300 || img.height !== 200) {
+          if (img.width/img.height !== 3/2) {
             this.sendNotification(
-                "アプリの画像は300×200pxでお願いします",
+                "アプリの画像は3:2でお願いします",
+                "error"
+            );
+            const upload = document.getElementById("upload");
+            upload.value = "";
+          } else if (this.uploadedImages.length === 5) {
+            this.sendNotification(
+                "アプリの画像は５枚までしか入力できません",
+                "error"
+            );
+            const upload = document.getElementById("upload");
+            upload.value = "";
+          } else if (file.size > 1000000) {
+            this.sendNotification(
+                "アプリの画像は1MB以下でお願いします",
                 "error"
             );
             const upload = document.getElementById("upload");
@@ -341,11 +346,9 @@ export default {
       );
       deleteObject(desertRef)
           .then(() => {
-            console.log("File deleted successfully");
             this.uploadedImages.splice(index, 1);
           })
           .catch((error) => {
-            console.log("Uh-oh, an error occurred!");
             console.log(error);
           });
     },

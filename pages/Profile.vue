@@ -17,7 +17,6 @@ export default {
       if (user) {
         const appUser = doc(this.$db, "users", user.uid);
         this.owner = await (await getDoc(appUser)).data();
-        console.log(this.owner)
         const apps = await getDocs(
             query(
                 collection(this.$db, "apps"),
@@ -29,7 +28,6 @@ export default {
           this.apps.push(app.data());
           this.apps[index].id = app.id;
         });
-        console.log(this.apps )
       } else {
         navigateTo("/");
       }
@@ -41,10 +39,8 @@ export default {
         const auth = getAuth();
         const user = auth.currentUser;
         user.delete().then(() => {
-          console.log("deleted");
           navigateTo("/");
         }).catch((error) => {
-          console.log(error);
         });
       }
     }

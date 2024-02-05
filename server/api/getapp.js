@@ -40,10 +40,7 @@ export default defineEventHandler(async (event) => {
             url: url,
             isOwner: isOwner,
         };
-        console.log("ges")
-        console.log(newVar)
         return newVar;
     } else {
-        console.log("No such document!");
     }
 })

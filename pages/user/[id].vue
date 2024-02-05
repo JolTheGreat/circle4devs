@@ -36,7 +36,6 @@ export default {
             where("draft", "==", false))
     );
     apps.docs.forEach((app, index) => {
-      console.log(app.data())
       this.apps.push(app.data());
       this.apps[index].id = app.id;
     });

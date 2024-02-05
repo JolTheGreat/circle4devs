@@ -7,21 +7,23 @@ import {
   where,
   limit,
   doc,
+  startAfter
 } from "firebase/firestore";
 import Card from "~/components/Card.vue";
+import axios from "axios";
 
 export default {
   name: "DashboardPage",
-  components: {Card},
   data() {
     return {
       isLoggedIn: false,
       user: [],
       recommends: [],
+      apps: {
+        apps: [],
+        lastDoc: null
+      }
     };
-  },
-  metaInfo: {
-    title: "This is title"
   },
   async mounted() {
     const auth = getAuth();
@@ -49,40 +51,71 @@ export default {
         );
       }
       this.recommends = recommends.docs.map((doc) => doc.data());
-      //add document id to the data
-      console.log(this.recommends);
       this.recommends.forEach((recommend, index) => {
         recommend.id = recommends.docs[index].id;
       });
     });
+
+
+    await this.getApps();
   },
   methods: {
     getUser() {
       const auth = getAuth();
       const user = auth.currentUser;
-      console.log(user);
       if (user) {
         return user;
       } else {
         return null;
       }
     },
-  },
+    async getApps() {
+      let appQuery = null;
+
+      if (this.apps.lastDoc) {
+        appQuery = query(
+            collection(this.$db, "apps"),
+            where("draft", "==", false),
+            limit(10),
+            startAfter(this.apps.lastDoc)
+        );
+      } else {
+        appQuery = query(
+            collection(this.$db, "apps"),
+            where("draft", "==", false),
+            limit(10)
+        );
+      }
+
+
+      const apps = await getDocs(appQuery);
+      const map = apps.docs.map((doc) => doc.data());
+      map.forEach((app, index) => {
+        app.id = apps.docs[index].id;
+      });
+      this.apps.apps.push(...map)
+
+      this.apps.lastDoc = apps.docs[apps.docs.length - 1];
+
+      return apps.size;
+    },
+    async loadMore() {
+      await this.getApps();
+    },
+  }
 };
 </script>
 
 <template>
   <Head>
     <Title>Circle4Devsダッシュボード</Title>
-
   </Head>
   <div id="home">
     <div class="page">
       <h1>Circle4Devs Dashboard</h1>
 
-      <div class="section">
-        <h2 v-if="isLoggedIn">{{ getUser().displayName }}さんにオススメのアプリ</h2>
-        <h2 v-else>オススメのアプリ</h2>
+      <div class="section" v-if="isLoggedIn">
+        <h2>{{ getUser().displayName }}さんにオススメのアプリ</h2>
         <div id="recommends">
           <template v-for="recommend in recommends" :key="recommend.id">
             <Card
@@ -97,7 +130,25 @@ export default {
           </template>
         </div>
       </div>
-      <!-- Create a section for a trending app -->
+      <div class="section" id="apps-section">
+        <h2>アプリ一覧</h2>
+        <div id="apps">
+          <template v-for="(app, index) in apps.apps" :key="app.id">
+            <Card
+                :id="app.id"
+                :title="app.title"
+                :catchphrase="app.catchphrase"
+                :image="app.images[0]"
+                :owner="app.owner"
+                :tags="app.tags"
+                class="card"
+            ></Card>
+            <button v-if="index % 10 === 0 && index !== 0" @click="loadMore()">Load more</button>
+          </template>
+
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -179,6 +230,19 @@ h2 {
 
 #recommends::-webkit-scrollbar-track {
   background: linear-gradient(90deg, #201c29, #201c29 1px, #17141d 0, #17141d);
+}
+
+#apps-section{
+  scroll-behavior: smooth;
+  height: 800px;
+  overflow-y: scroll;
+}
+
+#apps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
 .card {

@@ -30,53 +30,45 @@ export default {
         this.owner === undefined ||
         this.tags === undefined
     ) {
-      console.log("fetching data");
       const docRef = doc(this.$db, "apps", this.id);
       const docSnap = await getDoc(docRef);
 
       if (this.id === undefined) {
         this.idd = docSnap.id;
-        console.log(this.idd);
       } else {
         this.idd = this.id;
       }
 
       if (this.title === undefined) {
         this.t = docSnap.data().title;
-        console.log(this.t);
       } else {
         this.t = this.title;
       }
 
       if (this.catchphrase === undefined) {
         this.c = docSnap.data().catchphrase;
-        console.log(this.c);
       } else {
         this.c = this.catchphrase;
       }
 
       if (this.image === undefined) {
         this.i = docSnap.data().images[0];
-        console.log(this.i);
       } else {
         this.i = this.image;
       }
 
       if (this.owner === undefined) {
         this.o = docSnap.data().owner;
-        console.log(this.o);
       } else {
         this.o = this.owner;
       }
 
       if (this.tags === undefined) {
         this.tgs = docSnap.data().tags;
-        console.log(this.tgs);
       } else {
         this.tgs = this.tags;
       }
     } else {
-      console.log("using props");
       this.idd = this.id;
       this.t = this.title;
       this.c = this.catchphrase;
@@ -91,7 +83,6 @@ export default {
   },
   methods: {
     openArticle() {
-      console.log(this.idd)
       navigateTo(`/app/${this.idd}`, {external: true});
     },
   },

@@ -14,7 +14,6 @@ export default {
     const auth = getAuth();
     auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log(user);
         this.isLoggedIn = true;
       } else {
         this.isLoggedIn = false;
