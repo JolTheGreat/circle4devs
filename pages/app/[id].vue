@@ -3,12 +3,23 @@ import {deleteDoc, doc, getDoc, updateDoc} from "firebase/firestore";
 import Markdown from "markdown-it";
 import {deleteObject, getStorage, ref as storageRef} from "firebase/storage";
 import {useRoute} from "vue-router";
+import {getAuth} from "firebase/auth";
 
 const nuxtApp = useNuxtApp();
 const route = useRoute();
 const id = route.params.id;
+const auth = getAuth();
 
 const data = await reactive(nuxtApp.$app);
+let isOwner = ref(false);
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    isOwner.value = user.uid === data.owner.id;
+  }
+});
+
+console.log(data)
 useSeoMeta({
   title: data.title + "　-　Circle4Devs",
   description: data.catchphrase,
@@ -57,7 +68,6 @@ const deleteApp = async () => {
 };
 
 const revertToDraft = async () => {
-  const id = route.params.id;
   const docRef = doc(nuxtApp.$db, "apps", id);
   await updateDoc(docRef, {
     draft: true,
@@ -72,7 +82,8 @@ const revertToDraft = async () => {
     <div class="article-header">
       <h1>{{ data.title }}</h1>
       <p>{{ data.catchphrase }}</p>
-      <div id="images" v-for="image in data.images" :key="image">
+      <img :src="data.images[0]" alt="image" id="main-image"/>
+      <div id="images" v-for="image in data.images.slice(1)" :key="image">
         <img :src="image" alt="image"/>
       </div>
       <div id="tags" v-for="tag in data.tags" :key="tag">
@@ -83,8 +94,8 @@ const revertToDraft = async () => {
         <a :href="'/user/' + data.owner.id">{{ data.owner.name }}</a>
       </div>
       <button id="open-button" @click="openApp()">アプリを開く</button>
-      <button v-if="data.isOwner" id="delete-button" @click="deleteApp()">アプリを削除</button>
-      <button v-if="data.isOwner" id="edit-button" @click="revertToDraft()">下書きに戻す</button>
+      <button v-if="isOwner" id="delete-button" @click="deleteApp()">アプリを削除</button>
+      <button v-if="isOwner" id="edit-button" @click="revertToDraft()">下書きに戻す</button>
     </div>
     <div class="article-content">
       <div v-html="getMarkdown()"></div>
@@ -121,6 +132,13 @@ const revertToDraft = async () => {
   color: #777;
 }
 
+#main-image {
+  width: 600px;
+  height: 300px;
+  object-fit: cover;
+  margin-top: 20px;
+}
+
 #images {
   margin-top: 20px;
   display: flex;
@@ -132,11 +150,11 @@ const revertToDraft = async () => {
 #images img {
   width: 300px;
   height: 200px;
-  margin: 20px;
+  margin-top: 20px;
 }
 
 #tags {
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   margin-top: 20px;
 }

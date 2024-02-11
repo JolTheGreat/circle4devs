@@ -380,6 +380,7 @@ export default {
           id="draft-container"
       >
         <h3>{{ draft.title }}</h3>
+        <h4>{{ draft.catchphrase }}</h4>
         <p>{{ draft.url }}</p>
         <button @click="deleteDraft(draft.id)">削除</button>
         <button @click="openDraft(draft.id)">編集</button>

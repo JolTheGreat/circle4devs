@@ -3,7 +3,7 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 
-export default defineNuxtRouteMiddleware(async (to, from) => {
+export default defineNuxtRouteMiddleware(async (to) => {
     if (to.path.startsWith("/app")) {
         const nuxtApp = useNuxtApp();
         const runtimeConfig = useRuntimeConfig();
@@ -18,7 +18,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         }
 
         const id = to.params.id;
-        const auth = getAuth();
+        getAuth();
         const docRef = doc(nuxtApp.$db, "apps", id);
         const docSnap = await getDoc(docRef);
 
@@ -31,15 +31,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             const description = documentData.description;
             const owner =  (await getDoc(documentData.owner)).data();
             const url = documentData.url;
-            let isOwner;
-
-            auth.onAuthStateChanged((user) => {
-                if (user) {
-                    if (user.uid === owner.id) {
-                        isOwner = true;
-                    }
-                }
-            });
 
             nuxtApp.provide("app", {
                 title: title,
@@ -49,8 +40,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
                 description: description,
                 owner: owner,
                 url: url,
-                isOwner: isOwner,
             });
+
+
         } else {
             console.log("No such document!");
         }
