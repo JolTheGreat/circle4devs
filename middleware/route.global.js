@@ -44,7 +44,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
 
         } else {
-            console.log("No such document!");
         }
     }
 });

@@ -13,11 +13,7 @@ export default {
   mounted() {
     const auth = getAuth();
     auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.isLoggedIn = true;
-      } else {
-        this.isLoggedIn = false;
-      }
+      this.isLoggedIn = !!user;
     });
   },
   methods: {
@@ -26,8 +22,7 @@ export default {
         .then(() => {
           navigateTo("/auth");
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
     },
     publish: function () {

@@ -19,7 +19,6 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-console.log(data)
 useSeoMeta({
   title: data.title + "　-　Circle4Devs",
   description: data.catchphrase,

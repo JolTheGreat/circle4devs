@@ -9,8 +9,6 @@ import {
   doc,
   startAfter
 } from "firebase/firestore";
-import Card from "~/components/Card.vue";
-import axios from "axios";
 
 export default {
   name: "DashboardPage",
@@ -158,7 +156,6 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Corporate Logo ver3", sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   color: #333;
