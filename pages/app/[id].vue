@@ -4,11 +4,17 @@ import Markdown from "markdown-it";
 import {deleteObject, getStorage, ref as storageRef} from "firebase/storage";
 import {useRoute} from "vue-router";
 import {getAuth} from "firebase/auth";
+import {getAnalytics, logEvent} from "firebase/analytics";
 
 const nuxtApp = useNuxtApp();
 const route = useRoute();
 const id = route.params.id;
 const auth = getAuth();
+const analytics = getAnalytics();
+
+logEvent(analytics, "view_app", {
+  app_id: id,
+});
 
 const data = await reactive(nuxtApp.$app);
 let isOwner = ref(false);
