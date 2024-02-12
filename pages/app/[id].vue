@@ -140,7 +140,6 @@ const revertToDraft = async () => {
 
 #images {
   margin-top: 20px;
-  max-width: 500px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -149,6 +148,7 @@ const revertToDraft = async () => {
 
 #images img {
   width: 75%;
+  max-width: 500px;
   margin-top: 20px;
 }
 
@@ -300,6 +300,7 @@ const revertToDraft = async () => {
 
 :deep(.article-content) img {
   width: 70%;
+  max-width: 600px;
   height: 70%;
 }
 
