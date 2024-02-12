@@ -55,4 +55,10 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
+@media (max-width: 768px) {
+  #container {
+    padding: 120px;
+  }
+}
 </style>

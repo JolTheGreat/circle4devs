@@ -102,7 +102,7 @@ export default {
       </div>
       <div class="user">
         <img v-bind:src="o.photoUrl" alt="user"/>
-        <a v-bind:href="'/user' + o.id">{{ o.name }}</a>
+        <a v-bind:href="'/user/' + o.id">{{ o.name }}</a>
       </div>
     </div>
   </article>
@@ -111,10 +111,7 @@ export default {
 </template>
 <style scoped>
 .card {
-  min-width: 300px;
-  min-height: 480px;
   max-width: 300px;
-  max-height: 480px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -128,8 +125,6 @@ export default {
 }
 
 .card-image {
-  width: 300px;
-  height: 200px;
   overflow: hidden;
 }
 
@@ -141,7 +136,6 @@ export default {
 
 .card-content {
   padding: 1rem;
-  height: 280px;
   background: white;
 }
 
@@ -173,7 +167,7 @@ export default {
 .user {
   display: flex;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 1rem;
 }
 
 .user img {

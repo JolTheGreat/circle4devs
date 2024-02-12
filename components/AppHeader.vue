@@ -1,5 +1,5 @@
 <script>
-import { getAuth, signOut } from "firebase/auth";
+import {getAuth, signOut} from "firebase/auth";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 export default {
@@ -19,11 +19,11 @@ export default {
   methods: {
     logOut: async function () {
       signOut(getAuth())
-        .then(() => {
-          navigateTo("/auth");
-        })
-        .catch(() => {
-        });
+          .then(() => {
+            navigateTo("/auth");
+          })
+          .catch(() => {
+          });
     },
     publish: function () {
       if (!this.isLoggedIn) {
@@ -39,24 +39,30 @@ export default {
 <template>
   <div id="header">
     <img
-      src="@/assets/logo.png"
-      alt="logo"
-      @click="navigateTo('/dashboard')"
+        src="@/assets/logo.png"
+        alt="logo"
+        @click="navigateTo('/dashboard')"
     />
     <ul>
       <li>
-        <button @click="publish" id="post-button">アプリを出版する</button>
+        <button @click="publish" id="post-button">
+          <font-awesome-icon icon="fa-solid fa-plus"/>
+        </button>
       </li>
     </ul>
     <div id="pane">
       <button @click="navigateTo('/search')">
-        <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+        <font-awesome-icon icon="fa-solid fa-magnifying-glass"/>
       </button>
       <button @click="navigateTo('/profile')">
-        <font-awesome-icon icon="fa-solid fa-user" />
+        <font-awesome-icon icon="fa-solid fa-user"/>
       </button>
-      <button v-if="isLoggedIn" @click="logOut">ログアウト</button>
-      <button v-else @click="navigateTo('/auth')">ログイン</button>
+      <button v-if="isLoggedIn" @click="logOut">
+        <font-awesome-icon icon="fa-solid fa-user-right-from-bracket"/>
+      </button>
+      <button v-else @click="navigateTo('/auth')">
+        <font-awesome-icon icon="fa-solid fa-right-to-bracket"/>
+      </button>
     </div>
   </div>
 </template>

@@ -43,8 +43,8 @@
         <strong>Circle4Devs</strong>
         は、個人開発者同士がアプリを通じて交わるためのプラットフォームです。個人開発者が開発するアプリはWebアプリやモバイルアプリがありますが、それらの評価や使い勝手などはXやAppStoreといった様々な場所に散らばっています。小規模で開発されているアプリをまとめて、開発者にとっての最大の喜びである「使ってもらうこと」を満たすために、Circle4Devsは開発したアプリを発信し、他の開発者が使ってあげることで自分と似たような開発者たちに還元できる仕組みになっています。下記はこれから実装していきたい機能の一覧です。今のところ、他の個人開発者が作っているものを把握し、出版したアプリをXなどで共有することができます。上記のXとDiscordは整備中です！
       </p>
-      <div id="communication">
-        <img src="assets/undraw_chat_re_re1u.svg" alt="vector art"/>
+      <div id="communication" class="section">
+        <img src="assets/undraw_chat_re_re1u.svg" alt="vector art" class="vector-art"/>
         <div>
           <h2>開発者とユーザーのコミュニケーション</h2>
           <p>
@@ -52,20 +52,17 @@
           </p>
         </div>
       </div>
-      <div id="like">
+      <div id="like" class="section">
         <div>
           <h2>いいね、共感、評価</h2>
           <p>
             Circle4Devsでは、アプリやレビューに対する「いいね」や「共感」のリアクションを使って、開発者のアプリが評価されます。評価を元に、開発者はアプリに求められているものを把握し、改善に務めることができます。
           </p>
         </div>
-        <img src="/assets/undraw_love_it_xkc2.svg" alt="vector art"/>
+        <img src="/assets/undraw_love_it_xkc2.svg" alt="vector art" class="vector-art"/>
       </div>
-      <div id="ranking">
-        <img
-            src="/assets/undraw_personal_goals_re_iow7.svg"
-            alt="vector art"
-        />
+      <div id="ranking" class="section">
+        <img src="/assets/undraw_personal_goals_re_iow7.svg" alt="vector art" class="vector-art"/>
         <div>
           <h2>ランキングと発見</h2>
           <p>
@@ -234,14 +231,13 @@ li {
   width: 100%;
   max-width: 1200px;
 }
-
-#about img {
+img {
   width: 100%;
   max-width: 500px;
   margin-bottom: 2rem;
 }
 
-#communication {
+.section {
   margin-bottom: 2rem;
   margin-top: 5rem;
   display: flex;
@@ -251,62 +247,19 @@ li {
   width: 100%;
 }
 
-#communication img {
-  width: 100%;
-  max-width: 500px;
-  margin-right: 2rem;
-}
-
-#communication div {
+.section div {
   width: 100%;
   max-width: 500px;
 }
 
-#like {
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-#like img {
-  width: 100%;
-  max-width: 500px;
-  margin-left: 2rem;
-}
-
-#like div {
-  width: 100%;
-  max-width: 500px;
-}
-
-#ranking {
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-#ranking img {
-  width: 100%;
-  max-width: 500px;
-  margin-right: 2rem;
-}
-
-#ranking div {
-  width: 100%;
-  max-width: 500px;
-}
 
 @media (max-width: 768px) {
   .title-page {
     flex-direction: column;
-    //margin: 0 auto;
-    //padding-bottom: 0;
+  }
+
+  .section {
+    flex-direction: column;
   }
 
   .title-page-content {
@@ -315,10 +268,6 @@ li {
     text-align: center;
   }
 
-  .vector-art {
-    width: 100%;
-    height: 100%;
-  }
 
   .social-links {
     justify-content: center;

@@ -132,8 +132,7 @@ const revertToDraft = async () => {
 }
 
 #main-image {
-  width: 600px;
-  height: 300px;
+  width: 100%;
   object-fit: cover;
   margin-top: 20px;
 }
@@ -147,8 +146,7 @@ const revertToDraft = async () => {
 }
 
 #images img {
-  width: 300px;
-  height: 200px;
+  width: 75%;
   margin-top: 20px;
 }
 

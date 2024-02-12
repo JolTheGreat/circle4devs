@@ -1,11 +1,11 @@
 <script>
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+
 export default {
   name: "HeaderView",
+  components: {FontAwesomeIcon},
   methods: {
     register() {
-      navigateTo("/auth")
-    },
-    login() {
       navigateTo("/auth")
     },
   },
@@ -18,11 +18,10 @@ export default {
     <ul>
       <!--      <li><router-link to="/">Circle4Devsのご紹介</router-link></li>-->
       <li>
-        <router-link to="/privacy">プライバシーポリシー＆利用規約</router-link>
+        <router-link to="/privacy"><font-awesome-icon icon="fa-solid fa-file-contract"></font-awesome-icon></router-link>
       </li>
 
-      <li><button @click="register" id="register">登録する</button></li>
-      <li><button @click="login" id="login">ログインする</button></li>
+      <li><font-awesome-icon icon="fa-solid fa-right-to-bracket" @click="register"></font-awesome-icon></li>
     </ul>
   </div>
 </template>
@@ -72,66 +71,10 @@ export default {
   color: #555;
 }
 
-#register,
-#login {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 5px;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-#register {
-  background-color: #2dbfbf;
-  color: #fff;
-}
-
-#login {
-  background-color: #fff;
-  color: #2dbfbf;
-  border: 1px solid #2dbfbf;
-}
-
-#register:hover {
-  background-color: #1d7a7a;
-}
-
-#login:hover {
-  background-color: #fff;
-  color: #1d7a7a;
-  border: 1px solid #1d7a7a;
-}
-
 #header ul {
   display: flex;
   list-style: none;
   align-items: center;
 }
 
-@media (max-width: 768px) {
-  #header {
-    position: fixed;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 18rem;
-  }
-
-  #header img {
-    margin-bottom: 1rem;
-  }
-
-  #header ul {
-    flex-direction: column;
-  }
-
-  #header ul li {
-    margin-left: 0;
-    margin-bottom: 1rem;
-  }
-
-  #header ul li a {
-    font-size: 1.2rem;
-  }
-}
 </style>

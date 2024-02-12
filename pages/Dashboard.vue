@@ -245,4 +245,14 @@ h2 {
 .card {
   margin: 15px;
 }
+
+@media (max-width: 768px) {
+  .page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+}
+
+
 </style>
