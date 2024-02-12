@@ -10,11 +10,6 @@ const nuxtApp = useNuxtApp();
 const route = useRoute();
 const id = route.params.id;
 const auth = getAuth();
-const analytics = isSupported().then(yes => yes ? getAnalytics() : null);
-
-logEvent(await analytics, "view_app", {
-  app_id: id,
-});
 
 const data = await reactive(nuxtApp.$app);
 let isOwner = ref(false);
