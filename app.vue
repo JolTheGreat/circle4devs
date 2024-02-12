@@ -1,7 +1,9 @@
 <template>
-  <LandingHeader v-if="header"></LandingHeader>
-  <AppHeader v-else></AppHeader>
-    <NuxtPage />
+  <ClientOnly>
+    <LandingHeader v-if="header"></LandingHeader>
+    <AppHeader v-else></AppHeader>
+    <NuxtPage/>
+  </ClientOnly>
 </template>
 
 <script>
@@ -10,14 +12,14 @@ import landingheader from "~/components/LandingHeader.vue";
 
 export default {
   name: "App",
-  components: { appheader, landingheader },
+  components: {appheader, landingheader},
   computed: {
     header() {
       const route = useRoute();
       return (
-        route.path === "/" ||
-        route.path === "/auth" ||
-        route.path === "/privacy"
+          route.path === "/" ||
+          route.path === "/auth" ||
+          route.path === "/privacy"
       );
     },
   },

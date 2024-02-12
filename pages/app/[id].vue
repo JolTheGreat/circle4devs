@@ -4,7 +4,6 @@ import Markdown from "markdown-it";
 import {deleteObject, getStorage, ref as storageRef} from "firebase/storage";
 import {useRoute} from "vue-router";
 import {getAuth} from "firebase/auth";
-import {getAnalytics, logEvent, isSupported} from "firebase/analytics";
 
 const nuxtApp = useNuxtApp();
 const route = useRoute();
@@ -134,12 +133,14 @@ const revertToDraft = async () => {
 
 #main-image {
   width: 100%;
+  max-width: 600px;
   object-fit: cover;
   margin-top: 20px;
 }
 
 #images {
   margin-top: 20px;
+  max-width: 500px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
