@@ -4,11 +4,6 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 export default {
   name: "HeaderView",
   components: {FontAwesomeIcon},
-  methods: {
-    register() {
-      navigateTo("/auth")
-    },
-  },
 };
 </script>
 
@@ -21,7 +16,9 @@ export default {
         <router-link to="/privacy"><font-awesome-icon icon="fa-solid fa-file-contract"></font-awesome-icon></router-link>
       </li>
 
-      <li><font-awesome-icon icon="fa-solid fa-right-to-bracket" @click="register"></font-awesome-icon></li>
+      <li>
+        <router-link to="/auth"><font-awesome-icon icon="fa-solid fa-sign-in-alt"></font-awesome-icon></router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -75,6 +72,10 @@ export default {
   display: flex;
   list-style: none;
   align-items: center;
+}
+
+li:hover {
+  cursor: pointer;
 }
 
 </style>

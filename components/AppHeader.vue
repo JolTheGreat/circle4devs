@@ -58,7 +58,7 @@ export default {
         <font-awesome-icon icon="fa-solid fa-user"/>
       </button>
       <button v-if="isLoggedIn" @click="logOut">
-        <font-awesome-icon icon="fa-solid fa-user-right-from-bracket"/>
+        <font-awesome-icon icon="fa-solid fa-right-from-bracket"/>
       </button>
       <button v-else @click="navigateTo('/auth')">
         <font-awesome-icon icon="fa-solid fa-right-to-bracket"/>
