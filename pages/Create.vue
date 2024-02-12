@@ -83,6 +83,10 @@ export default {
         console.error("Error updating user token:", error);
       }
     },
+    openDraft(draftId) {
+      window.history.pushState({}, null, `/create?draftId=${draftId}`);
+      this.loadDraft(draftId);
+    },
     async loadDraft(draftId) {
       try {
         const docRef = doc(this.$db, "apps", draftId);
@@ -306,7 +310,7 @@ export default {
         <h4>{{ draft.catchphrase }}</h4>
         <p>{{ draft.url }}</p>
         <button @click="deleteDraft(draft.id)">削除</button>
-        <button @click="window.location.href = `/create?draftId=${draft.id}`">編集</button>
+        <button @click="openDraft(draft.id)">編集</button>
       </div>
     </div>
     <br/>
