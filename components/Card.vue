@@ -162,6 +162,7 @@ export default {
   padding: 0.2rem 0.5rem;
   border-radius: 0.5rem;
   margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .user {
