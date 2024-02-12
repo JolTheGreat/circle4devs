@@ -1,5 +1,5 @@
 <script>
-import { getAuth } from "firebase/auth";
+import {getAuth} from "firebase/auth";
 import {
   where,
   query,
@@ -61,6 +61,18 @@ export default {
         this.auth.isLoggedIn = false;
       }
     });
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.isDraft) {
+      const confirmMessage = "このページを離れると保存されていないデータが削除されます。";
+      if (confirm(confirmMessage)) {
+        next();
+      } else {
+        next(false);
+      }
+    } else {
+      next();
+    }
   },
   methods: {
     async updateUserToken(user) {
@@ -176,7 +188,7 @@ export default {
               tags: this.tags,
               draft: draft,
             },
-            { merge: true }
+            {merge: true}
         );
       } catch (error) {
         console.error("Error updating app draft:", error);
@@ -274,13 +286,13 @@ export default {
 <!-- Template code remains unchanged -->
 
 
-
 <template>
   <Head>
     <Title>アプリを出版する</Title>
   </Head>
   <div id="general-container">
     <h1>アプリを出版する</h1>
+    <span>保存をお忘れなく！</span>
 
     <div v-if="auth.isLoggedIn && drafts.length !== 0" id="drafts">
       <h2>下書き一覧</h2>

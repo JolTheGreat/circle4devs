@@ -1,7 +1,7 @@
 <script>
 import {
   collection,
-  doc, getDoc, getDocs, limit, query, where,
+  doc, getDoc, getDocs, query, where,
 } from "firebase/firestore";
 import {getAuth} from "firebase/auth";
 
@@ -150,22 +150,6 @@ export default {
   overflow-y: hidden;
   border-radius: 1rem;
   background: whitesmoke;
-}
-
-#apps-list::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-#apps-list::-webkit-scrollbar-thumb {
-  background: #2dbfbf;
-  border-radius: 10px;
-  box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25),
-  inset -2px -2px 2px rgba(0, 0, 0, 0.25);
-}
-
-#apps-list::-webkit-scrollbar-track {
-  background: linear-gradient(90deg, #201c29, #201c29 1px, #17141d 0, #17141d);
 }
 
 </style>
