@@ -4,15 +4,15 @@ import Markdown from "markdown-it";
 import {deleteObject, getStorage, ref as storageRef} from "firebase/storage";
 import {useRoute} from "vue-router";
 import {getAuth} from "firebase/auth";
-import {getAnalytics, logEvent} from "firebase/analytics";
+import {getAnalytics, logEvent, isSupported} from "firebase/analytics";
 
 const nuxtApp = useNuxtApp();
 const route = useRoute();
 const id = route.params.id;
 const auth = getAuth();
-const analytics = getAnalytics();
+const analytics = isSupported().then(yes => yes ? getAnalytics(app) : null);
 
-logEvent(analytics, "view_app", {
+logEvent(await analytics, "view_app", {
   app_id: id,
 });
 
