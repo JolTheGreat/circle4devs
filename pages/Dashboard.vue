@@ -204,30 +204,15 @@ h2 {
   margin-top: 2rem;
   padding: 1rem;
   height: max-content;
-  justify-content: space-between;
-  display: flex;
-  align-items: center;
-  overflow-x: scroll;
-  overflow-y: hidden;
   border-radius: 1rem;
   background: whitesmoke;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  overflow-y: hidden;
 }
 
-#recommends::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-#recommends::-webkit-scrollbar-thumb {
-  background: #2dbfbf;
-  border-radius: 10px;
-  box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25),
-  inset -2px -2px 2px rgba(0, 0, 0, 0.25);
-}
-
-#recommends::-webkit-scrollbar-track {
-  background: linear-gradient(90deg, #201c29, #201c29 1px, #17141d 0, #17141d);
-}
 
 #apps-section{
   scroll-behavior: smooth;
