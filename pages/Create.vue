@@ -280,7 +280,26 @@ export default {
         this.notifyUser("アプリ名は60文字以下でお願いします", "error");
         return false;
       }
-      // Check other validation rules
+
+      if (this.catchphrase.length > 100) {
+        this.notifyUser("キャッチフレーズは100文字以下でお願いします", "error");
+        return false;
+      }
+
+      if (this.description.length > 10000) {
+        this.notifyUser("アプリの説明は10000文字以下でお願いします", "error");
+        return false;
+      }
+
+      if (this.tags.length === 0) {
+        this.notifyUser("タグを入力してください", "error");
+        return false;
+      }
+
+      if (this.tags.length > 5) {
+        this.notifyUser("タグは５つまでしか入力できません", "error");
+        return false;
+      }
       return true;
     },
   },
