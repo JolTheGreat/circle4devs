@@ -357,6 +357,13 @@ export default {
       if (input.value.length === 0) {
         return;
       }
+
+      if (this.tags.indexOf(input.value) !== -1) {
+        this.sendNotification("同じタグは入力できません", "error");
+        input.value = "";
+        return;
+      }
+
       this.tags.push(input.value);
       input.value = "";
     },

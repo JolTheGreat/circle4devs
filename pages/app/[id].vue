@@ -302,6 +302,7 @@ const revertToDraft = async () => {
   width: 70%;
   max-width: 600px;
   height: 70%;
+  display: block;
 }
 
 :deep(.article-content) p {
@@ -323,6 +324,7 @@ const revertToDraft = async () => {
 
 :deep(.article-content) li {
   margin-bottom: 8px;
+  margin-left: 16px;
 }
 
 :deep(.article-content) blockquote {
