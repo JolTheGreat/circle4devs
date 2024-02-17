@@ -37,7 +37,8 @@ export default defineNuxtConfig({
         applicationId: process.env.ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_API_KEY,
         instantSearch: {theme: 'satellite'}
-    }]],
+    }],
+    '@nuxtjs/seo'],
     runtimeConfig: {
         public: {
             firebase: {
