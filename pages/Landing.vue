@@ -13,6 +13,8 @@
     <Meta name="twitter:description" content="開発したアプリを発信しよう！"/>
     <Meta name="twitter:url" content="https://circle4devs.netlify.app/"/>
     <Meta name="twitter:domain" content="Circle4Devs"/>
+
+    <Meta name="google-site-verification" content="ss-wDpzNen2Gl_UZVF9Y4x_Bg2APqP5TwLZQp7y9Obk" />
   </Head>
   <div id="landing">
     <div class="title-page">
