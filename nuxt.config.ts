@@ -39,6 +39,14 @@ export default defineNuxtConfig({
         instantSearch: {theme: 'satellite'}
     }],
     '@nuxtjs/seo'],
+    seo: {
+        fallbackTitle: false,
+    },
+    app: {
+        head: {
+            titleTemplate: '%s',
+        }
+    },
     runtimeConfig: {
         public: {
             firebase: {
