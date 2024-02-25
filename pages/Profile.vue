@@ -188,6 +188,10 @@ export default {
   align-items: center;
 }
 
+#badges-list:hover {
+  cursor: help;
+}
+
 #delete-button {
   margin-top: 5%;
 }

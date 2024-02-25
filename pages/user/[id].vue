@@ -4,13 +4,16 @@ import {
   doc, getDoc, getDocs, query, where,
 } from "firebase/firestore";
 import {getAuth} from "firebase/auth";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 export default {
   name: "UserPage",
+  components: {FontAwesomeIcon},
   data() {
     return {
       user: {},
-      apps: []
+      apps: [],
+      badges: [],
     };
   },
   async mounted() {
@@ -28,6 +31,11 @@ export default {
     const userRef = doc(this.$db, "users", userId);
     const userSnap = await getDoc(userRef);
     this.user = userSnap.data();
+    for (const badge of this.user.badges) {
+      const badgeDoc = doc(this.$db, "badges", badge.id);
+      const badgeData = await (await getDoc(badgeDoc)).data();
+      this.badges.push(badgeData);
+    }
 
     const apps = await getDocs(
         query(
@@ -53,6 +61,33 @@ export default {
       </div>
       <div id="profile-name">
         <h3>{{ user.name }}</h3>
+      </div>
+      <div id="badges">
+        <div id="badges-list">
+          <template v-for="badge in badges" :key="badge.id">
+            <font-awesome-icon
+                v-if="badge.name==='新人バッジ'"
+                icon="fa-solid fa-star"
+                size="xl"
+                :title="badge.name + '\n\n説明：' + badge.description + '\n\n条件：' + badge.condition"
+                style="color: #007BFF"
+            />
+            <font-awesome-icon
+                v-if="badge.name==='パイオニアバッジ'"
+                icon="fa-solid fa-star"
+                size="xl"
+                :title="badge.name + '\n\n説明：' + badge.description + '\n\n条件：' + badge.condition"
+                style="color: #fff900"
+            />
+            <font-awesome-icon
+                v-if="badge.name==='管理者バッジ'"
+                icon="fa-solid fa-star"
+                size="xl"
+                :title="badge.name + '\n\n説明：' + badge.description + '\n\n条件：' + badge.condition"
+                style="color: #e30000"
+            />
+          </template>
+        </div>
       </div>
     </div>
 
@@ -124,6 +159,18 @@ export default {
 #profile-name h3 {
   font-size: 2rem;
   font-weight: bold;
+}
+
+#badges {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#badges-list:hover {
+  cursor: help;
 }
 
 #apps {

@@ -187,5 +187,6 @@ export default {
 
 .user a:hover {
   color: #555;
+  text-decoration: underline;
 }
 </style>
