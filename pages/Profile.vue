@@ -2,13 +2,16 @@
 
 import {collection, doc, getDoc, getDocs, query, where} from "firebase/firestore";
 import {getAuth} from "firebase/auth";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 export default {
   name: "ProfilePage",
+  components: {FontAwesomeIcon},
   data() {
     return {
       owner: "",
       apps: [],
+      badges: []
     };
   },
   mounted() {
@@ -17,13 +20,19 @@ export default {
       if (user) {
         const appUser = doc(this.$db, "users", user.uid);
         this.owner = await (await getDoc(appUser)).data();
+        for (const badge of this.owner.badges) {
+          const badgeDoc = doc(this.$db, "badges", badge.id);
+          const badgeData = await (await getDoc(badgeDoc)).data();
+          this.badges.push(badgeData);
+        }
+
         const apps = await getDocs(
             query(
                 collection(this.$db, "apps"),
                 where("owner", "==", appUser)
             )
         );
-        // add app to this.app and add id to each app
+
         apps.docs.forEach((app, index) => {
           this.apps.push(app.data());
           this.apps[index].id = app.id;
@@ -50,7 +59,7 @@ export default {
 
 <template>
   <Head>
-    <Title>{{owner.name}}</Title>
+    <Title>{{ owner.name }}</Title>
   </Head>
   <div id="container">
     <h2>プロフィール</h2>
@@ -61,6 +70,34 @@ export default {
         </div>
         <div id="profile-name">
           <h3>{{ owner.name }}</h3>
+        </div>
+        <div id="badges">
+          <div id="badges-list">
+            <template v-for="badge in badges" :key="badge.id">
+              <font-awesome-icon
+                  v-if="badge.name==='新人バッジ'"
+                  icon="fa-solid fa-star"
+                  size="xl"
+                  :title="badge.name + '\n\n説明：' + badge.description + '\n\n条件：' + badge.condition"
+                  style="color: #007BFF"
+              />
+              <font-awesome-icon
+                  v-if="badge.name==='パイオニアバッジ'"
+                  icon="fa-solid fa-star"
+                  size="xl"
+                  :title="badge.name + '\n\n説明：' + badge.description + '\n\n条件：' + badge.condition"
+                  style="color: #fff900"
+              />
+              <font-awesome-icon
+                  v-if="badge.name==='管理者バッジ'"
+                  icon="fa-solid fa-star"
+                  size="xl"
+                  :title="badge.name + '\n\n説明：' + badge.description + '\n\n条件：' + badge.condition"
+                  style="color: #e30000"
+              />
+            </template>
+          </div>
+          <button id="delete-button" @click="deleteAccount">アカウントを削除</button>
         </div>
         <button id="delete-button" @click="deleteAccount">アカウントを削除</button>
       </div>
@@ -143,6 +180,14 @@ export default {
   font-weight: bold;
 }
 
+#badges {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #delete-button {
   margin-top: 5%;
 }
@@ -165,11 +210,11 @@ export default {
   padding: 1rem;
   height: max-content;
   justify-content: space-between;
-  display: flex;
-  align-items: center;
-  overflow-x: scroll;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  width: 100%;
   overflow-y: hidden;
-  border-radius: 1rem;
   background: whitesmoke;
 }
 

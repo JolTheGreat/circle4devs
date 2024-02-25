@@ -137,6 +137,7 @@ export default {
 .card-content {
   padding: 1rem;
   background: white;
+  height: 100%;
 }
 
 .card-content h2 {

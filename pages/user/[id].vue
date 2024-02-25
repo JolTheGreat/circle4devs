@@ -144,11 +144,11 @@ export default {
   padding: 1rem;
   height: max-content;
   justify-content: space-between;
-  display: flex;
-  align-items: center;
-  overflow-x: scroll;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  width: 100%;
   overflow-y: hidden;
-  border-radius: 1rem;
   background: whitesmoke;
 }
 
