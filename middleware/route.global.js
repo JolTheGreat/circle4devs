@@ -33,6 +33,7 @@ async function app(to) {
         const catchphrase = documentData.catchphrase;
         const images = documentData.images;
         const tags = documentData.tags;
+        const createdAt = documentData.createdAt;
         const description = documentData.description;
         const owner = (await getDoc(documentData.owner)).data();
         const url = documentData.url;
@@ -42,6 +43,7 @@ async function app(to) {
             catchphrase: catchphrase,
             images: images,
             tags: tags,
+            createdAt: createdAt,
             description: description,
             owner: owner,
             url: url,

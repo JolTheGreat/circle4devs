@@ -11,6 +11,25 @@ const id = route.params.id;
 const auth = getAuth();
 
 const data = await reactive(nuxtApp.$app);
+const date = data.createdAt.toDate();
+//１日前などの表記に変換。今日だったら時刻を表示
+const dateText = (() => {
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+  const diffDays = diff / (1000 * 60 * 60 * 24);
+  if (diffDays < 1) {
+    return `${date.getHours()}時${date.getMinutes()}分`;
+  } else if (diffDays < 7) {
+    return `${Math.floor(diffDays)}日前`;
+  } else if (diffDays < 30) {
+    return `${Math.floor(diffDays / 7)}週間前`;
+  } else if (diffDays < 365) {
+    return `${Math.floor(diffDays / 30)}ヶ月前`;
+  } else {
+    return `${Math.floor(diffDays / 365)}年前`;
+  }
+})();
+
 let isOwner = ref(false);
 
 auth.onAuthStateChanged((user) => {
@@ -18,6 +37,7 @@ auth.onAuthStateChanged((user) => {
     isOwner.value = user.uid === data.owner.id;
   }
 });
+
 
 useSeoMeta({
   title: data.title,
@@ -81,6 +101,7 @@ const revertToDraft = async () => {
     <div class="article-header">
       <h1>{{ data.title }}</h1>
       <p>{{ data.catchphrase }}</p>
+      <p style="font-size: 15px; color: black">{{dateText}}</p>
       <img :src="data.images[0]" alt="image" id="main-image"/>
       <div id="images" v-for="image in data.images.slice(1)" :key="image">
         <img :src="image" alt="image"/>
