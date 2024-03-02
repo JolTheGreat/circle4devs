@@ -20,7 +20,7 @@ auth.onAuthStateChanged((user) => {
 });
 
 useSeoMeta({
-  title: data.title + "　-　Circle4Devs",
+  title: data.title,
   description: data.catchphrase,
   image: data.images[0],
   twitterCard: "summary_large_image",
