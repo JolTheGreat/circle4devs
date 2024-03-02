@@ -5,6 +5,10 @@ export default {
 </script>
 
 <template>
+  <Head>
+    <Title>利用規約とプライバシーポリシー</Title>
+  </Head>
+
   <h1>利用規約（プライバシーポリシーは下にあります）</h1>
 
   <p>

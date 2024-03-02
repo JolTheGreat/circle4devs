@@ -54,6 +54,10 @@ export default {
 </script>
 
 <template>
+  <Head>
+    <Title>{{ user.name }}のプロフィール</Title>
+  </Head>
+
   <div id="container">
     <div id="profile">
       <div id="profile-image">

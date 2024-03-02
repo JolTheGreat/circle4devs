@@ -44,7 +44,7 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
-            titleTemplate: '%s',
+            titleTemplate: '%s | Circle4Devs',
         }
     },
     runtimeConfig: {

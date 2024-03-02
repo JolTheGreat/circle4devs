@@ -99,7 +99,6 @@ export default {
           </div>
           <button id="delete-button" @click="deleteAccount">アカウントを削除</button>
         </div>
-        <button id="delete-button" @click="deleteAccount">アカウントを削除</button>
       </div>
       <div id="apps">
         <h3>投稿したアプリ</h3>
