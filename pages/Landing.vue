@@ -34,7 +34,6 @@
         </div>
       </div>
       <img
-          class="vector-art"
           src="/assets/undraw_software_engineer_re_tnjc.svg"
           alt="vector art"
       />
@@ -183,6 +182,7 @@ li {
   margin: 0 auto;
   width: 100%;
   max-width: 500px;
+  padding: 25px;
 }
 
 /* Animations */

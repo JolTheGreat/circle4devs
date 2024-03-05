@@ -276,7 +276,6 @@ export default {
         url: this.url,
         tags: this.tags,
         owner: owner,
-        likedByUsers: [],
         draft: draft,
         createdAt: new Date(),
       };
