@@ -277,7 +277,6 @@ export default {
         tags: this.tags,
         owner: owner,
         draft: draft,
-        createdAt: new Date(),
       };
       const docRef = await addDoc(collectionRef, data1);
       window.history.pushState({}, null, `/create?draftId=${docRef.id}`);

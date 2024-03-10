@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import {collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 
@@ -37,6 +37,12 @@ async function app(to) {
         const description = documentData.description;
         const owner = (await getDoc(documentData.owner)).data();
         const url = documentData.url;
+        const likesCollection = collection(nuxtApp.$db, "apps", id, "likes");
+        //map all documents in likes collection as array
+        const likesDocs = await getDocs(likesCollection);
+        const likes = likesDocs.docs.map((doc) => doc.data());
+        const likeCount = documentData.likeCount;
+
 
         nuxtApp.provide("app", {
             title: title,
@@ -47,6 +53,8 @@ async function app(to) {
             description: description,
             owner: owner,
             url: url,
+            likes: likes,
+            likeCount: likeCount,
         });
     }
 }

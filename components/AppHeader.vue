@@ -30,7 +30,7 @@ export default {
         navigateTo("/auth");
         return;
       }
-      navigateTo("/create");
+      navigateTo("/create", {external: true});
     },
   },
 };
