@@ -1,9 +1,10 @@
 <script setup>
-import {deleteDoc, doc, getDoc, updateDoc} from "firebase/firestore";
+import {collection, deleteDoc, doc, getDoc, setDoc, updateDoc} from "firebase/firestore";
 import Markdown from "markdown-it";
 import {deleteObject, getStorage, ref as storageRef} from "firebase/storage";
 import {useRoute} from "vue-router";
 import {getAuth} from "firebase/auth";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 const nuxtApp = useNuxtApp();
 const route = useRoute();
@@ -94,6 +95,65 @@ const revertToDraft = async () => {
   alert("下書きに戻しました。アプリを出版するときの画面にて確認できます。")
   navigateTo("/dashboard");
 };
+
+const alreadyLiked = () => {
+  if (!auth.currentUser) {
+    return false;
+  }
+
+  for (let i = 0; i < data.likes.length; i++) {
+    if (data.likes[i].userId === auth.currentUser.uid) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+const likeApp = async () => {
+  if (!auth.currentUser) {
+    navigateTo("/auth");
+  }
+
+  if (alreadyLiked()) {
+    return;
+  }
+
+  const likesCollection = collection(nuxtApp.$db, "apps", id, "likes");
+  //use user id as an id
+  await setDoc(doc(likesCollection, auth.currentUser.uid), {
+    userId: auth.currentUser.uid,
+    appId: id,
+  });
+
+  data.likes.push({
+    userId: auth.currentUser.uid,
+    appId: id,
+  });
+  data.likeCount++;
+};
+
+const unlikeApp = async () => {
+  if (!auth.currentUser) {
+    navigateTo("/auth");
+  }
+
+  if (!alreadyLiked()) {
+    return;
+  }
+
+  const likesCollection = collection(nuxtApp.$db, "apps", id, "likes");
+  const likesDoc = await getDoc(doc(likesCollection, auth.currentUser.uid));
+  await deleteDoc(likesDoc.ref);
+
+  for (let i = 0; i < data.likes.length; i++) {
+    if (data.likes[i].userId === auth.currentUser.uid) {
+      data.likes.splice(i, 1);
+      break;
+    }
+  }
+  data.likeCount--;
+};
 </script>
 
 <template>
@@ -101,7 +161,12 @@ const revertToDraft = async () => {
     <div class="article-header">
       <h1>{{ data.title }}</h1>
       <p>{{ data.catchphrase }}</p>
-      <p style="font-size: 15px; color: black">{{dateText}}</p>
+      <p style="font-size: 15px; color: black">{{ dateText }}</p>
+      <div id="like">
+        <font-awesome-icon v-if="alreadyLiked()" @click="unlikeApp" icon="fa-solid fa-heart" style="color: #f91880" id="unlike-button"/>
+        <font-awesome-icon v-else icon="fa-regular fa-heart" @click="likeApp" style="color: #f91880" id="like-button"/>
+        <span>{{ data.likeCount }}</span>
+      </div>
       <img :src="data.images[0]" alt="image" id="main-image"/>
       <div id="images" v-for="image in data.images.slice(1)" :key="image">
         <img :src="image" alt="image"/>
@@ -150,6 +215,33 @@ const revertToDraft = async () => {
   font-weight: bold;
   margin-top: 10px;
   color: #777;
+}
+
+#like {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+
+}
+
+#like font-awesome-icon {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+#like-button:hover {
+  cursor: pointer;
+}
+
+#unlike-button:hover {
+  cursor: pointer;
+}
+
+#like span {
+  font-weight: bold;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 #main-image {

@@ -10,8 +10,12 @@ import {
     faRightFromBracket,
     faRightToBracket,
     faUser,
-    faStar
+    faStar,
+    faHeart as faHeartSolid
 } from "@fortawesome/free-solid-svg-icons";
+import {
+    faHeart as faHeartRegular
+} from "@fortawesome/free-regular-svg-icons";
 import {config, library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
@@ -27,7 +31,9 @@ library.add(
     faRightToBracket,
     faRightFromBracket,
     faFileContract,
-    faStar
+    faStar,
+    faHeartSolid,
+    faHeartRegular
 )
 
 export default defineNuxtPlugin((nuxtApp) => {
