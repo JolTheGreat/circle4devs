@@ -43,28 +43,6 @@ export default {
 body {
   margin-top: 5rem;
 }
-
-/**
-Make the scroll bar almost invisible
- */
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #aaa;
-}
 </style>
 <script setup lang="ts">
 </script>

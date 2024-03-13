@@ -154,13 +154,13 @@ export default {
 <style scoped>
 #home {
   margin: 0;
+  top: 0;
   padding: 0;
-  box-sizing: border-box;
   font-size: 1rem;
+  height: max-content;
   line-height: 1.5;
   color: #333;
   background: #2dbfbf;
-  overflow: hidden;
 }
 
 h1 {
@@ -182,12 +182,8 @@ h2 {
 
 .page {
   width: 100%;
-  height: 100vh;
-  margin: 10% auto auto;
-  padding-bottom: 30%;
   position: relative;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding: 4rem 2rem 3rem;
 }
 
 .section {
