@@ -169,7 +169,7 @@ export default {
 .user {
   display: flex;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
 
 .user img {

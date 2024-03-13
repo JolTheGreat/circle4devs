@@ -148,6 +148,7 @@ export default {
         </div>
       </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 

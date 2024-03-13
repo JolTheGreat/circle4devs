@@ -65,6 +65,7 @@ export default {
       </div>
       <div id="profile-name">
         <h3>{{ user.name }}</h3>
+        <p>@{{user.id}}</p>
       </div>
       <div id="badges">
         <div id="badges-list">
