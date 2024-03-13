@@ -160,7 +160,7 @@ export default {
   line-height: 1.5;
   color: #333;
   background: #2dbfbf;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 h1 {
@@ -216,8 +216,7 @@ h2 {
 
 #apps-section{
   scroll-behavior: smooth;
-  height: 800px;
-  overflow-y: scroll;
+  height: min-content;
 }
 
 #apps {
