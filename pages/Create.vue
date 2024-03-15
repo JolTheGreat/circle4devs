@@ -200,7 +200,7 @@ export default {
         message: message,
         type: type,
         position: "bottom",
-        duration: 8000,
+        duration: 5000,
         dismissible: true,
       });
     },

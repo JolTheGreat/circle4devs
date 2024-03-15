@@ -29,7 +29,8 @@ export default {
         const apps = await getDocs(
             query(
                 collection(this.$db, "apps"),
-                where("owner", "==", appUser)
+                where("owner", "==", appUser),
+                where("draft", "==", false)
             )
         );
 
@@ -97,7 +98,16 @@ export default {
               />
             </template>
           </div>
-          <button id="delete-button" @click="deleteAccount">アカウントを削除</button>
+          <div id="actions">
+            <button class="action-button" @click="navigateTo('/edituser')">
+              <font-awesome-icon icon="pen" style="color: #007BFF;"/>
+            </button>
+            <button class="action-button" @click="deleteAccount">
+              <font-awesome-icon icon="fa-solid fa-trash" style="color: #fe001e;"/>
+            </button>
+
+          </div>
+
         </div>
       </div>
       <div id="apps">
@@ -191,8 +201,24 @@ export default {
   cursor: help;
 }
 
-#delete-button {
+#actions {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-button {
   margin-top: 5%;
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 #apps {
@@ -219,6 +245,7 @@ export default {
   width: 100%;
   overflow-y: hidden;
   background: whitesmoke;
+  border-radius: 12px;
 }
 
 </style>

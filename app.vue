@@ -3,7 +3,6 @@
     <LandingHeader v-if="header"></LandingHeader>
     <AppHeader v-else></AppHeader>
     <NuxtPage/>
-    <Footer></Footer>
   </ClientOnly>
 </template>
 
@@ -43,6 +42,7 @@ export default {
 body {
   margin-top: 5rem;
 }
+
 </style>
 <script setup lang="ts">
 </script>
