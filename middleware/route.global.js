@@ -46,7 +46,7 @@ async function app(to) {
         const satisfactionsCollection = collection(nuxtApp.$db, "apps", id, "satisfactions");
         const satisfactionsDocs = await getDocs(satisfactionsCollection);
         const satisfactions = satisfactionsDocs.docs.map((doc) => doc.data());
-        const satisfactionScore = documentData.satisfactionScore;
+        const satisfactionScore = Number(documentData.satisfactionScore).toFixed(1);
 
         nuxtApp.provide("app", {
             title: title,

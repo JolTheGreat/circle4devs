@@ -197,7 +197,7 @@ const setSatisfactionScore = (score) => {
   for (let i = 0; i < data.satisfactions.length; i++) {
     total += data.satisfactions[i].score;
   }
-  data.satisfactionScore = total / (data.satisfactions.length - 1);
+  data.satisfactionScore = (total / (data.satisfactions.length - 1)).toFixed(1);
 };
 
 const deleteSatisfactionScore = async () => {
@@ -228,7 +228,7 @@ const deleteSatisfactionScore = async () => {
   if (total === 0) {
     data.satisfactionScore = 0;
   } else {
-    data.satisfactionScore = total / (data.satisfactions.length - 1);
+    data.satisfactionScore = (total / (data.satisfactions.length - 1)).toFixed(1);
   }
 };
 </script>
