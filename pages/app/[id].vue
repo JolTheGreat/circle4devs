@@ -32,10 +32,18 @@ const dateText = (() => {
 })();
 
 let isOwner = ref(false);
+let loggedIn = ref(false);
+let satisfactionScore = ref(1);
 
 auth.onAuthStateChanged((user) => {
   if (user) {
     isOwner.value = user.uid === data.owner.id;
+    loggedIn.value = true;
+    for (let i = 0; i < data.satisfactions.length; i++) {
+      if (data.satisfactions[i].userId === auth.currentUser.uid) {
+        satisfactionScore.value = data.satisfactions[i].score;
+      }
+    }
   }
 });
 
@@ -154,6 +162,75 @@ const unlikeApp = async () => {
   }
   data.likeCount--;
 };
+
+
+const setSatisfactionScore = (score) => {
+  if (!auth.currentUser) {
+    navigateTo("/auth?redirect=" + route.fullPath);
+  }
+
+  const satisfactionCollection = collection(nuxtApp.$db, "apps", id, "satisfactions");
+  const scoreCount = Number(score);
+  setDoc(doc(satisfactionCollection, auth.currentUser.uid), {
+    userId: auth.currentUser.uid,
+    appId: id,
+    score: scoreCount,
+  });
+
+  if (data.satisfactions.some(satisfaction => satisfaction.userId === auth.currentUser.uid)) {
+    for (let i = 0; i < data.satisfactions.length; i++) {
+      if (data.satisfactions[i].userId === auth.currentUser.uid) {
+        data.satisfactions[i].score = scoreCount;
+        break;
+      }
+    }
+  } else {
+    data.satisfactions.push({
+      userId: auth.currentUser.uid,
+      appId: id,
+      score: scoreCount,
+    });
+  }
+  console.log(data.satisfactions);
+  //loop through satisfactions and calculate the average
+  let total = 0;
+  for (let i = 0; i < data.satisfactions.length; i++) {
+    total += data.satisfactions[i].score;
+  }
+  data.satisfactionScore = total / (data.satisfactions.length - 1);
+};
+
+const deleteSatisfactionScore = async () => {
+  if (!auth.currentUser) {
+    navigateTo("/auth");
+  }
+
+  const satisfactionCollection = collection(nuxtApp.$db, "apps", id, "satisfactions");
+  const satisfactionDoc = await getDoc(doc(satisfactionCollection, auth.currentUser.uid));
+
+  if (!satisfactionDoc.exists()) {
+    return;
+  }
+  await deleteDoc(satisfactionDoc.ref);
+
+  for (let i = 0; i < data.satisfactions.length; i++) {
+    if (data.satisfactions[i].userId === auth.currentUser.uid) {
+      data.satisfactions.splice(i, 1);
+      break;
+    }
+  }
+
+  let total = 0;
+  for (let i = 0; i < data.satisfactions.length; i++) {
+    total += data.satisfactions[i].score;
+  }
+
+  if (total === 0) {
+    data.satisfactionScore = 0;
+  } else {
+    data.satisfactionScore = total / (data.satisfactions.length - 1);
+  }
+};
 </script>
 
 <template>
@@ -162,10 +239,32 @@ const unlikeApp = async () => {
       <h1>{{ data.title }}</h1>
       <p>{{ data.catchphrase }}</p>
       <p style="font-size: 15px; color: black">{{ dateText }}</p>
-      <div id="like">
-        <font-awesome-icon v-if="alreadyLiked()" @click="unlikeApp" icon="fa-solid fa-heart" style="color: #f91880" id="unlike-button"/>
-        <font-awesome-icon v-else icon="fa-regular fa-heart" @click="likeApp" style="color: #f91880" id="like-button"/>
-        <span>{{ data.likeCount }}</span>
+      <div id="stats">
+        <div>
+          <span id="user-icon" title="ユーザー数（評価の数から算出されます）"><font-awesome-icon icon="fa-solid fa-user" size="2xl"/></span>
+          <p>{{data.satisfactions.length - 1}}人</p>
+        </div>
+        <div>
+          <span id="satisfaction-icon" title="満足度"><font-awesome-icon icon="fa-solid fa-face-smile" size="2xl"/></span>
+          <p>{{ data.satisfactionScore }}%</p>
+        </div>
+      </div>
+      <div id="rating">
+        <div id="like">
+          <font-awesome-icon v-if="alreadyLiked()" @click="unlikeApp" icon="fa-solid fa-heart" style="color: #f91880"
+                             id="unlike-button"/>
+          <font-awesome-icon v-else icon="fa-regular fa-heart" @click="likeApp" style="color: #f91880"
+                             id="like-button"/>
+          <span>{{ data.likeCount }}</span>
+        </div>
+        <div id="satisfaction">
+          <input type="range" min="1" max="100" v-model="satisfactionScore" style="width: 100px;"/>
+          <span>あなたの評価：　{{ satisfactionScore }}%</span>
+          <button @click="setSatisfactionScore(satisfactionScore)">評価する</button>
+          <button v-if="loggedIn && data.satisfactions.some(satisfaction => satisfaction.userId === auth.currentUser.uid)"
+                  @click="deleteSatisfactionScore()">評価を取り消す
+          </button>
+        </div>
       </div>
       <img :src="data.images[0]" alt="image" id="main-image"/>
       <div id="images" v-for="image in data.images.slice(1)" :key="image">
@@ -217,31 +316,91 @@ const unlikeApp = async () => {
   color: #777;
 }
 
-#like {
+#stats {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   margin-top: 20px;
-
 }
 
-#like font-awesome-icon {
-  font-size: 1.5rem;
-  margin-right: 10px;
-  cursor: pointer;
+#stats p {
+  color: black;
 }
 
-#like-button:hover {
-  cursor: pointer;
+#stats div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 40px;
+}
+
+#user-icon {
+  color: #2dbfbf;
+}
+
+#satisfaction-icon {
+  color: #f91880;
 }
 
 #unlike-button:hover {
   cursor: pointer;
 }
 
-#like span {
+#rating {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  margin-top: 40px;
+  align-items: center;
+}
+
+#rating span {
   font-weight: bold;
-  margin-left: 10px;
+}
+
+#like {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 20px;
+}
+
+#like:hover {
   cursor: pointer;
+}
+
+#like span {
+  margin-left: 10px;
+}
+
+#like span:hover {
+  cursor: auto;
+}
+
+#satisfaction {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#satisfaction span {
+  font-weight: bold;
+}
+
+#satisfaction button {
+  padding: 5px 10px;
+  width: 5rem;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #2dbfbf;
+  color: #fff;
+}
+
+#satisfaction button:hover {
+  background-color: #219191;
 }
 
 #main-image {
