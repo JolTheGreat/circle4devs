@@ -13,6 +13,7 @@ export default {
   },
   async mounted() {
     const firebaseui = await import('firebaseui/dist/esm__ja')
+    const route = this.$route;
     const ui =
         firebaseui.auth.AuthUI.getInstance() ||
         new firebaseui.auth.AuthUI(getAuth());
@@ -28,7 +29,12 @@ export default {
           user.getIdToken().then(function (accessToken) {
             document.cookie = `token=${accessToken}`;
           });
-          navigateTo("/dashboard");
+          const redirect = route.query.redirect;
+          if (redirect) {
+            navigateTo(redirect);
+          } else {
+            navigateTo("/dashboard");
+          }
         },
       },
     });

@@ -57,7 +57,7 @@
           </p>
         </div>
       </div>
-      <div id="like" class="section">
+      <div id="rating" class="section">
         <div>
           <h2>いいね、共感、評価</h2>
           <p>

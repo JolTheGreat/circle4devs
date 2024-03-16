@@ -13,7 +13,8 @@ import {
     faStar,
     faHeart as faHeartSolid,
     faTrash,
-    faPen
+    faPen,
+    faFaceSmile
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faHeart as faHeartRegular
@@ -37,7 +38,8 @@ library.add(
     faHeartSolid,
     faHeartRegular,
     faTrash,
-    faPen
+    faPen,
+    faFaceSmile
 )
 
 export default defineNuxtPlugin((nuxtApp) => {

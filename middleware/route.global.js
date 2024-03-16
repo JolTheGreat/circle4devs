@@ -37,12 +37,16 @@ async function app(to) {
         const description = documentData.description;
         const owner = (await getDoc(documentData.owner)).data();
         const url = documentData.url;
+
         const likesCollection = collection(nuxtApp.$db, "apps", id, "likes");
-        //map all documents in likes collection as array
         const likesDocs = await getDocs(likesCollection);
         const likes = likesDocs.docs.map((doc) => doc.data());
         const likeCount = documentData.likeCount;
 
+        const satisfactionsCollection = collection(nuxtApp.$db, "apps", id, "satisfactions");
+        const satisfactionsDocs = await getDocs(satisfactionsCollection);
+        const satisfactions = satisfactionsDocs.docs.map((doc) => doc.data());
+        const satisfactionScore = documentData.satisfactionScore;
 
         nuxtApp.provide("app", {
             title: title,
@@ -55,6 +59,8 @@ async function app(to) {
             url: url,
             likes: likes,
             likeCount: likeCount,
+            satisfactions: satisfactions,
+            satisfactionScore: satisfactionScore,
         });
     }
 }
