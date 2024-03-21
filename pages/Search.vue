@@ -1,19 +1,30 @@
 <script>
 import "instantsearch.css/themes/satellite.css";
+import algoliasearch from "algoliasearch/lite.js";
 
 export default {
   name: "SearchPage",
   data() {
     return {
-      searchClient: useAlgoliaRef()
+      query: "",
+      hits: [],
+      index: null,
     };
   },
   mounted() {
-    const url = new URL(window.location.href);
-    const query = url.searchParams.get("q");
-
-    if (query !== null) {
-      document.getElementById("search-box").scrollIntoView();
+    const searchClient = algoliasearch(
+        "VFQE8S5Y20",
+        "2352cde0d4c737c8389b852a1c8b348c"
+    );
+    this.index = searchClient.initIndex("apps");
+    //initial search
+    this.search();
+  },
+  methods: {
+    search() {
+      this.index.search(this.query).then(({hits}) => {
+        this.hits = hits;
+      });
     }
   },
 };
@@ -26,14 +37,14 @@ export default {
   <div id="container">
     <h2>検索</h2>
     <div id="search-box">
-      <ais-instant-search :search-client="searchClient" index-name="firestore">
-        <ais-search-box />
-        <ais-hits>
-          <template v-slot:item="{ item }">
-            <Card v-bind:id="item.objectID" />
-          </template>
-        </ais-hits>
-      </ais-instant-search>
+      <input v-model="query" @input="search" type="text" placeholder="検索"/>
+      <div id="hits">
+        <div v-for="hit in hits" :key="hit.objectID" class="entries">
+          <Card
+              :id="hit.objectID"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -46,6 +57,7 @@ export default {
   flex-direction: column;
   align-items: center;
   padding-top: 10%;
+
 }
 
 #search-box {
@@ -54,7 +66,32 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 5rem;
 }
+
+#search-box input {
+  width: 50%;
+  height: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+#hits {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.entries {
+  margin: 1rem;
+}
+
+
 
 @media (max-width: 768px) {
   #container {

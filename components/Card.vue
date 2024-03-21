@@ -111,12 +111,14 @@ export default {
 </template>
 <style scoped>
 .card {
-  max-width: 300px;
+  width: 300px;
+  height: 480px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .card:hover {
@@ -154,10 +156,12 @@ export default {
 .tags {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 1rem
 }
 
 .tags span {
   font-size: 0.8rem;
+  height: min-content;
   color: #333;
   background: #eee;
   padding: 0.2rem 0.5rem;
@@ -169,7 +173,6 @@ export default {
 .user {
   display: flex;
   align-items: center;
-  margin-top: 0.8rem;
 }
 
 .user img {
