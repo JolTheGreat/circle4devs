@@ -95,6 +95,7 @@ export default {
       <img v-bind:src="i" alt="image"/>
     </div>
     <div class="card-content">
+      <a style="display: none" v-bind:href="'/app/' + this.idd"></a>
       <h2>{{ t }}</h2>
       <p>{{ c }}</p>
       <div class="tags">
@@ -139,7 +140,6 @@ export default {
 .card-content {
   padding: 1rem;
   background: white;
-  height: 100%;
 }
 
 .card-content h2 {
