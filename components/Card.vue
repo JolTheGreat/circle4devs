@@ -120,6 +120,7 @@ export default {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   white-space: nowrap;
+  background: white;
 }
 
 .card:hover {
