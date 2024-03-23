@@ -11,7 +11,7 @@
     <Meta property="og:type" content="website"/>
     <Meta property="og:site_name" content="Circle4Devs"/>
     <Meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/circle-404609.appspot.com/o/logo.png?alt=media&token=2baccc57-95f9-4c60-b80c-c74d8fb51cf9"/>
-    <Meta name="twitter:card" content="summary_large_image"/>
+`````    <Meta name="twitter:card" content="summary_large_image"/>`````
     <Meta name="twitter:site" content="@Circle4Devs"/>
     <Meta name="twitter:title" content="Circle4Devsとは？"/>
     <Meta name="twitter:description" content="開発したアプリを発信しよう！"/>
@@ -44,17 +44,17 @@
       />
     </div>
     <section id="about">
-      <h1>Circle4Devsとは</h1>
+      <h1>Circle4Devsについて</h1>
       <p>
         <strong>Circle4Devs</strong>
-        は、個人開発者同士がアプリを通じて交わるためのプラットフォームです。個人開発者が開発するアプリはWebアプリやモバイルアプリがありますが、それらの評価や使い勝手などはXやAppStoreといった様々な場所に散らばっています。小規模で開発されているアプリをまとめて、開発者にとっての最大の喜びである「使ってもらうこと」を満たすために、Circle4Devsは開発したアプリを発信し、他の開発者が使ってあげることで自分と似たような開発者たちに還元できる仕組みになっています。下記はこれから実装していきたい機能の一覧です。今のところ、他の個人開発者が作っているものを把握し、出版したアプリをXなどで共有することができます。上記のXとDiscordは整備中です！
+        は、個人開発者が作成したアプリを一覧表示し、共有するためのプラットフォームです。開発者同士が互いのアプリを発見し、フィードバックを交換することで、より良いアプリを生み出すことを目指しています。
       </p>
       <div id="communication" class="section">
         <img src="assets/undraw_chat_re_re1u.svg" alt="vector art" class="vector-art"/>
         <div>
           <h2>開発者とユーザーのコミュニケーション</h2>
           <p>
-            開発者同士がそれぞれ開発したアプリを発信し、それらについての感想、評価、コメントを共有できる場所です。開発者が集まることから、初期ユーザーを集めることなどに適しています。
+            開発者は自分のアプリを登録し、他のアプリを閲覧できます。また、今後はいいね機能やコメント機能など、コミュニティ機能を追加する予定です。開発者同士がアプリについて感想や評価を共有し、より良いアプリを作り上げていくための場所です。
           </p>
         </div>
       </div>
@@ -62,7 +62,7 @@
         <div>
           <h2>いいね、共感、評価</h2>
           <p>
-            Circle4Devsでは、アプリやレビューに対する「いいね」や「共感」のリアクションを使って、開発者のアプリが評価されます。評価を元に、開発者はアプリに求められているものを把握し、改善に務めることができます。
+            Circle4Devsでは、開発者が自分のアプリを登録し、他のアプリを閲覧できます。また、いいね機能や共感機能を利用して、開発者のアプリが評価されます。評価を元に、開発者はアプリの改善に取り組むことができます。
           </p>
         </div>
         <img src="/assets/undraw_love_it_xkc2.svg" alt="vector art" class="vector-art"/>
@@ -72,11 +72,11 @@
         <div>
           <h2>ランキングと発見</h2>
           <p>
-            Circle4Devsは、人気コンテンツやトピックをランキング化し、新たな発見をサポートし、あなたの興味に合ったコンテンツやトピックを簡単に見つけます。
+            Circle4Devsは、開発者が互いのアプリを発見し、フィードバックを交換するための場所です。人気コンテンツやトピックをランキング化し、新たな発見をサポートし、より良いアプリを作り上げていくことを目指しています。
           </p>
         </div>
       </div>
-      <h2>さあ、Circle4Devsで新しい個人開発を始めましょう！</h2>
+      <h2>Circle4Devsで新しい個人開発を始めましょう！</h2>
     </section>
     <section id="job-hunting">
       <h1>転職を考えているあなたへ</h1>
