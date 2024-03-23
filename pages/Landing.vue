@@ -1,7 +1,8 @@
 <template>
   <Head>
     <Title>Circle4Devsとは？</Title>
-    <Meta name="description" content="開発したアプリを発信しよう！"/>
+    <Meta name="title" content="Circle4Devsとは？"/>
+    <Meta name="description" content="開発したアプリを発信し、他の開発者と繋がれる画期的なプラットフォーム"/>
     <Meta name="keywords" content="Circle4Devs, アプリ, 開発, プラットフォーム"/>
     <Meta name="author" content="Circle4Devs"/>
     <Meta property="og:title" content="Circle4Devsとは？"/>
