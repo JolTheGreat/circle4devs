@@ -17,7 +17,10 @@ export default {
         "2352cde0d4c737c8389b852a1c8b348c"
     );
     this.index = searchClient.initIndex("apps");
-    //initial search
+    const query = this.$route.query.q;
+    if (query) {
+      this.query = query;
+    }
     this.search();
   },
   methods: {
@@ -39,11 +42,11 @@ export default {
     <div id="search-box">
       <input v-model="query" @input="search" type="text" placeholder="検索"/>
       <div id="hits">
-        <div v-for="hit in hits" :key="hit.objectID" class="entries">
+        <template v-for="hit in hits" :key="hit.objectID" class="entries">
           <Card
               :id="hit.objectID"
           />
-        </div>
+        </template>
       </div>
     </div>
   </div>
@@ -57,7 +60,6 @@ export default {
   flex-direction: column;
   align-items: center;
   padding-top: 10%;
-
 }
 
 #search-box {
@@ -87,7 +89,7 @@ export default {
   justify-content: center;
 }
 
-.entries {
+:deep(.card) {
   margin: 1rem;
 }
 
