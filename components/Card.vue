@@ -81,11 +81,6 @@ export default {
     const owner = await getDoc(this.o);
     this.o = owner.data();
   },
-  methods: {
-    openArticle() {
-      navigateTo(`/app/${this.idd}`, {external: true});
-    },
-  },
 };
 </script>
 
@@ -98,7 +93,7 @@ export default {
       <h2>{{ t }}</h2>
       <p>{{ c }}</p>
       <div class="tags">
-        <span v-for="tag in tgs" :key="tag">#{{ tag }}</span>
+        <a v-for="tag in tgs" :key="tag" v-bind:href="'/search?q=' + tag">#{{ tag }}</a>
       </div>
       <div class="user">
         <img v-bind:src="o.photoUrl" alt="user"/>
@@ -161,7 +156,7 @@ export default {
   margin-bottom: 1rem
 }
 
-.tags span {
+.tags a {
   font-size: 0.8rem;
   height: min-content;
   color: #333;
@@ -170,6 +165,12 @@ export default {
   border-radius: 0.5rem;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.tags a:hover {
+  background: #ddd;
+  color: #555;
 }
 
 .user {
