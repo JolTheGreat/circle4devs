@@ -90,12 +90,11 @@ export default {
 </script>
 
 <template>
-  <article class="card" @click="openArticle">
+  <a class="card" v-bind:href="'/app/' + this.idd">
     <div class="card-image">
       <img v-bind:src="i" alt="image"/>
     </div>
     <div class="card-content">
-      <a style="display: none" v-bind:href="'/app/' + this.idd"></a>
       <h2>{{ t }}</h2>
       <p>{{ c }}</p>
       <div class="tags">
@@ -106,7 +105,7 @@ export default {
         <a v-bind:href="'/user/' + o.id">{{ o.name }}</a>
       </div>
     </div>
-  </article>
+  </a>
 
   <!-- Add more cards here -->
 </template>
@@ -121,6 +120,8 @@ export default {
   cursor: pointer;
   white-space: nowrap;
   background: white;
+  text-decoration: none;
+  color: black;
 }
 
 .card:hover {

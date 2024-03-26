@@ -14,6 +14,7 @@ export default {
       user: {},
       apps: [],
       badges: [],
+      own: false
     };
   },
   async mounted() {
@@ -23,7 +24,7 @@ export default {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         if (user.uid === userId) {
-          navigateTo("/profile");
+          this.own = true;
         }
       }
     });
@@ -48,7 +49,17 @@ export default {
       this.apps[index].id = app.id;
     });
   },
-  methods: {},
+  methods: {
+    deleteAccount() {
+      if (confirm("アカウントを削除しますか？ この操作は取り消せません")) {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        user.delete().then(() => {
+          navigateTo("/");
+        });
+      }
+    }
+  }
 };
 
 </script>
@@ -92,6 +103,14 @@ export default {
                 style="color: #e30000"
             />
           </template>
+        </div>
+        <div id="actions" v-if="own">
+          <button class="action-button" @click="navigateTo('/edituser')">
+            <font-awesome-icon icon="pen" style="color: #007BFF;"/>
+          </button>
+          <button class="action-button" @click="deleteAccount">
+            <font-awesome-icon icon="fa-solid fa-trash" style="color: #fe001e;"/>
+          </button>
         </div>
       </div>
     </div>
@@ -176,6 +195,26 @@ export default {
 
 #badges-list:hover {
   cursor: help;
+}
+
+#actions {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-button {
+  margin-top: 5%;
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 #apps {
