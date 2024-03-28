@@ -404,7 +404,7 @@ export default {
           v-model="catchphrase"
       />
 
-      <label for="upload">アプリの画像（300×200px ５枚まで)</label>
+      <label for="upload">アプリの画像（横：縦　３：２ ５枚まで)</label>
       <input type="file" multiple @change="onFileChange" id="upload"/>
       <div
           v-for="(image, index) in uploadedImages"

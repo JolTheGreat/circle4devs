@@ -114,7 +114,7 @@ export default {
 
       <div class="section" v-if="isLoggedIn">
         <h2>{{ getUser().displayName }}さんにオススメのアプリ</h2>
-        <div id="recommends">
+        <div class="app-container">
           <template v-for="recommend in recommends" :key="recommend.id">
             <Card
                 :id="recommend.id"
@@ -130,7 +130,7 @@ export default {
       </div>
       <div class="section" id="apps-section">
         <h2>アプリ一覧</h2>
-        <div id="apps">
+        <div class="app-container">
           <template v-for="(app, index) in apps.apps" :key="app.id">
             <Card
                 :id="app.id"
@@ -197,7 +197,7 @@ h2 {
   margin-bottom: 2rem;
 }
 
-#recommends {
+.app-container {
   margin-top: 2rem;
   padding: 1rem;
   height: max-content;
@@ -211,17 +211,7 @@ h2 {
 }
 
 
-#apps-section{
-  scroll-behavior: smooth;
-  height: min-content;
-}
 
-#apps {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-}
 
 .card {
   margin: 15px;
