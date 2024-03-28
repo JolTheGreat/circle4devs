@@ -32,7 +32,7 @@
           <button @click="start">Circle4Devsを開く</button>
         </div>
         <div class="social-links">
-          <a href="">
+          <a href="#">
             <font-awesome-icon icon="fa-brands fa-twitter"/>
           </a>
           <a href="#">
@@ -78,6 +78,8 @@
           </p>
         </div>
       </div>
+
+      di
       <h2>Circle4Devsで新しい個人開発を始めよう！</h2>
     </section>
   </div>
