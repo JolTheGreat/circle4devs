@@ -28,7 +28,7 @@
       <div class="title-page-content">
         <div class="title-wrapper">
           <h1>個人開発を一歩先へ</h1>
-          <p>あなたのアプリが、あなたの未来を切り開く</p>
+          <p>開発したアプリを共有しよう！</p>
           <button @click="start">Circle4Devsを開く</button>
         </div>
         <div class="social-links">
