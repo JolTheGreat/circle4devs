@@ -49,7 +49,7 @@
       <h1>Circle4Devsについて</h1>
       <p>
         <strong>Circle4Devs</strong>
-        は、個人開発者が作成したアプリを一覧表示し、共有するためのプラットフォームです。開発者同士が互いのアプリを発見し、フィードバックを交換することで、より良いアプリを生み出すことを目指しています。
+        は、個人開発者が作成したアプリを一覧表示し、共有するためのプラットフォームです。開発者同士が互いのアプリを発見し、フィードバックを交換することで、より良いアプリを生み出すことを目指しています。また、ユーザーと開発者の間での円滑なフィードバックを実現させます。
       </p>
       <div id="communication" class="section">
         <img src="assets/undraw_chat_re_re1u.svg" alt="vector art" class="vector-art"/>
@@ -74,47 +74,11 @@
         <div>
           <h2>ランキングと発見</h2>
           <p>
-            Circle4Devsは、開発者が互いのアプリを発見し、フィードバックを交換するための場所です。人気コンテンツやトピックをランキング化し、新たな発見をサポートし、より良いアプリを作り上げていくことを目指しています。
+            Circle4Devsは、開発者が互いのアプリを発見し、フィードバックを交換するための場所です。人気コンテンツやトピックをランキング化し、新たな発見をサポートし、より良いアプリを作り上げていくことを目指しています。Coming soon...
           </p>
         </div>
       </div>
-      <h2>Circle4Devsで新しい個人開発を始めましょう！</h2>
-    </section>
-    <section id="job-hunting">
-      <h1>転職を考えているあなたへ</h1>
-      <p>
-        <strong>Circle4Devs</strong>は、転職を考えている開発者のためのプラットフォームでもあります。あなたがこれまでに開発したアプリを投稿し、それを通じて自分のスキルをアピールすることができます。また、他の開発者からフィードバックを得ることで、自分のスキルをさらに磨くことができます。
-      </p>
-      <div id="portfolio" class="section">
-        <img src="/assets/undraw_about_me_re_82bv.svg" alt="vector art" class="vector-art"/>
-        <div>
-          <h2>ポートフォリオ作成</h2>
-          <p>
-            Circle4Devsでは、あなたが開発したアプリを投稿することで、自分だけのポートフォリオを作成することができます。これにより、転職活動時に自分のスキルを具体的に示すことができます。
-          </p>
-        </div>
-      </div>
-      <div id="feedback" class="section">
-        <div>
-          <h2>フィードバックと評価</h2>
-          <p>
-            Circle4Devsでは、他の開発者からフィードバックや評価を得ることができます。これにより、自分のスキルを客観的に理解し、改善することができます。
-            ↑ユーザーが集まり次第、実装予定です。
-          </p>
-        </div>
-        <img src="/assets/undraw_feedback_re_urmj.svg" alt="vector art" class="vector-art"/>
-      </div>
-      <div id="networking" class="section">
-        <img src="/assets/undraw_social_networking_re_i1ex.svg" alt="vector art" class="vector-art"/>
-        <div>
-          <h2>ネットワーキング</h2>
-          <p>
-            Circle4Devsは、開発者同士が交流する場でもあります。新たな機会を見つけることができ、また他の開発者と協力してプロジェクトを進めることも可能になります。
-            ↑ユーザーが集まり次第、実装予定です。
-          </p>
-        </div>
-      </div>
-      <h2>さあ、Circle4Devsで新しいキャリアを始めましょう！</h2>
+      <h2>Circle4Devsで新しい個人開発を始めよう！</h2>
     </section>
   </div>
 </template>
