@@ -107,6 +107,7 @@ export default {
 <template>
   <Head>
     <Title>Circle4Devsダッシュボード</Title>
+    <Meta name="description" content="Circle4Devsのダッシュボードです"></Meta>
   </Head>
   <div id="home">
     <div class="page">

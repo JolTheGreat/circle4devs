@@ -55,7 +55,8 @@ export default defineNuxtConfig({
         exclude: [
             '/admin/**',
             '/EditUser',
-            '/Create'
+            '/Create',
+            '/Dashboard'
         ],
         sources: [
             '/api/__sitemap__/sitemap'
