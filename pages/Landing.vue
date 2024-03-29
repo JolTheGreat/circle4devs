@@ -2,7 +2,7 @@
   <Head>
     <Title>Circle4Devsとは？</Title>
     <Meta name="title" content="Circle4Devsとは？"/>
-    <Meta name="description" content="開発したアプリを発信し、他の開発者と繋がれる画期的なプラットフォーム"/>
+    <Meta name="description" content="開発したアプリを共有し、他の開発者と繋がれる画期的なプラットフォーム"/>
     <Meta name="keywords" content="Circle4Devs, アプリ, 開発, プラットフォーム"/>
     <Meta name="author" content="Circle4Devs"/>
     <Meta property="og:title" content="Circle4Devsとは？"/>
@@ -64,7 +64,7 @@
         <div>
           <h2>いいね、共感、評価</h2>
           <p>
-            Circle4Devsでは、開発者が自分のアプリを登録し、他のアプリを閲覧できます。また、いいね機能や共感機能を利用して、開発者のアプリが評価されます。評価を元に、開発者はアプリの改善に取り組むことができます。
+            Circle4Devsでは、開発者が自分のアプリを共有し、他のアプリを閲覧できます。また、いいね機能や共感機能を利用して、開発者のアプリが評価されます。評価を元に、開発者はアプリの改善に取り組むことができます。
           </p>
         </div>
         <img src="/assets/undraw_love_it_xkc2.svg" alt="vector art" class="vector-art"/>

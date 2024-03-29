@@ -32,6 +32,14 @@ export default {
       }
       navigateTo("/create", {external: true});
     },
+    openProfile: function () {
+      if (!this.isLoggedIn) {
+        navigateTo("/auth");
+        return;
+      }
+      const auth = getAuth();
+      navigateTo(`/user/${auth.currentUser.uid}`);
+    },
   },
 };
 </script>
@@ -54,7 +62,7 @@ export default {
       <button @click="navigateTo('/search')">
         <font-awesome-icon icon="fa-solid fa-magnifying-glass"/>
       </button>
-      <button @click="navigateTo('/profile')">
+      <button @click="openProfile()">
         <font-awesome-icon icon="fa-solid fa-user"/>
       </button>
       <button v-if="isLoggedIn" @click="logOut">
