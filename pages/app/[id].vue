@@ -531,6 +531,7 @@ const deleteSatisfactionScore = async () => {
 :deep(.article-content) h1 {
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 40px;
   border-left: 8px solid #2dbfbf; /* Width represents higher significance */
   padding-left: 10px;
 }
@@ -538,6 +539,7 @@ const deleteSatisfactionScore = async () => {
 :deep(.article-content) h2 {
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 40px;
   border-left: 6px solid #2dbfbf; /* Moderately significant */
   padding-left: 10px;
 }
@@ -545,6 +547,7 @@ const deleteSatisfactionScore = async () => {
 :deep(.article-content) h3 {
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 40px;
   border-left: 4px solid #2dbfbf; /* Less significant */
   padding-left: 10px;
 }
@@ -552,6 +555,7 @@ const deleteSatisfactionScore = async () => {
 :deep(.article-content) h4 {
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 40px;
   border-left: 3px solid #2dbfbf; /* Even less significant */
   padding-left: 10px;
 }
@@ -559,6 +563,7 @@ const deleteSatisfactionScore = async () => {
 :deep(.article-content) h5 {
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 40px;
   border-left: 2px solid #2dbfbf; /* Relatively minor */
   padding-left: 10px;
 }
@@ -566,6 +571,7 @@ const deleteSatisfactionScore = async () => {
 :deep(.article-content) h6 {
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 40px;
   border-left: 1px solid #2dbfbf; /* Least significant */
   padding-left: 10px;
 }
