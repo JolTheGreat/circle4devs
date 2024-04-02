@@ -1,7 +1,7 @@
 <template>
   <Head>
     <Title>Circle4Devs公式</Title>
-    <Meta name="title" content="Circle4Devs公式"/>
+    <Meta name="title" content="Circle4Devs公式　- ProductHuntの"/>
     <Meta name="description" content="開発したアプリを共有し、フィードバックを得られる画期的なプラットフォーム"/>
     <Meta name="keywords" content="Circle4Devs, アプリ, 開発, プラットフォーム"/>
     <Meta name="author" content="Circle4Devs"/>
@@ -10,16 +10,16 @@
     <Meta property="og:url" content="https://circle4devs.netlify.app/"/>
     <Meta property="og:type" content="website"/>
     <Meta property="og:site_name" content="Circle4Devs"/>
-    <Meta property="og:image"
-          content="https://firebasestorage.googleapis.com/v0/b/circle-404609.appspot.com/o/logo.png?alt=media&token=2baccc57-95f9-4c60-b80c-c74d8fb51cf9"/>
+<!--    <Meta property="og:image"-->
+<!--          content="https://firebasestorage.googleapis.com/v0/b/circle-404609.appspot.com/o/logo.png?alt=media&token=2baccc57-95f9-4c60-b80c-c74d8fb51cf9"/>-->
     <Meta name="twitter:card" content="summary_large_image"/>
     <Meta name="twitter:site" content="@Circle4Devs"/>
     <Meta name="twitter:title" content="Circle4Devs公式"/>
     <Meta name="twitter:description" content="開発したアプリを共有し、フィードバックを得られる画期的なプラットフォーム"/>
     <Meta name="twitter:url" content="https://circle4devs.netlify.app/"/>
     <Meta name="twitter:domain" content="Circle4Devs"/>
-    <Meta name="twitter:image"
-          content="https://firebasestorage.googleapis.com/v0/b/circle-404609.appspot.com/o/logo.png?alt=media&token=2baccc57-95f9-4c60-b80c-c74d8fb51cf9"/>
+<!--    <Meta name="twitter:image"-->
+<!--          content="https://firebasestorage.googleapis.com/v0/b/circle-404609.appspot.com/o/logo.png?alt=media&token=2baccc57-95f9-4c60-b80c-c74d8fb51cf9"/>-->
 
     <Meta name="google-site-verification" content="ss-wDpzNen2Gl_UZVF9Y4x_Bg2APqP5TwLZQp7y9Obk"/>
   </Head>
