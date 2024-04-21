@@ -18,6 +18,7 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
+import {v4 as uuid} from 'uuid';
 
 export default {
   name: "CreatePage",
@@ -282,7 +283,11 @@ export default {
       window.history.pushState({}, null, `/create?draftId=${docRef.id}`);
     },
     async onFileChange(event) {
-      const file = event.target.files[0];
+      const original = event.target.files[0];
+      const blob = original.slice(0, original.size, original.type);
+      const file = new File([blob], uuid().toString(), {
+        type: event.target.files[0].type,
+      });
       if (file) {
         //restrict image file type (only allow png and jpg (jpeg))
         if (
@@ -553,7 +558,6 @@ export default {
   border: none;
   outline: none;
   border-radius: 5px;
-  padding: 0.5rem 1rem;
   font-weight: 500;
   cursor: pointer;
 }
