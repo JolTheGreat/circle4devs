@@ -78,8 +78,6 @@
           </p>
         </div>
       </div>
-
-      di
       <h2>Circle4Devsで新しい個人開発を始めよう！</h2>
     </section>
   </div>
