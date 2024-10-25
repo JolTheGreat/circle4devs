@@ -148,6 +148,7 @@ export default {
 .card-content p {
   font-size: 1rem;
   margin-bottom: 1rem;
+  text-wrap: auto;
 }
 
 .tags {
