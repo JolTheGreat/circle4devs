@@ -1,7 +1,7 @@
 <template>
   <Head>
     <Title>Circle4Devs公式</Title>
-    <Meta name="title" content="Circle4Devs公式　- ProductHuntの"/>
+    <Meta name="title" content="Circle4Devs公式"/>
     <Meta name="description" content="開発したアプリを共有し、フィードバックを得られる画期的なプラットフォーム"/>
     <Meta name="keywords" content="Circle4Devs, アプリ, 開発, プラットフォーム"/>
     <Meta name="author" content="Circle4Devs"/>
